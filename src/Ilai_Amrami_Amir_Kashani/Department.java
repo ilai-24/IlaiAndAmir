@@ -1,5 +1,8 @@
 package Ilai_Amrami_Amir_Kashani;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Department {
     private String name;
     private Lecturer[] lecturers;
@@ -95,4 +98,12 @@ public class Department {
         }
         return str.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return numOfStudents == that.numOfStudents && numOfLecturers == that.numOfLecturers && Objects.equals(name, that.name) && Objects.deepEquals(lecturers, that.lecturers);
+    }
+
 }
