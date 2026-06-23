@@ -1,5 +1,8 @@
 package Ilai_Amrami_Amir_Kashani;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Lecturer {
     public enum eTitle{Bachelor, Master, Doctor}
     private eTitle title;
@@ -144,6 +147,13 @@ public class Lecturer {
 
 
         return str.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Lecturer lecturer = (Lecturer) o;
+        return id == lecturer.id && Double.compare(salary, lecturer.salary) == 0 && numOfLecturerCommittees == lecturer.numOfLecturerCommittees && numOfArticles == lecturer.numOfArticles && title == lecturer.title && Objects.equals(name, lecturer.name) && Objects.equals(degreeName, lecturer.degreeName) && Objects.equals(department, lecturer.department) && Objects.deepEquals(committees, lecturer.committees) && Objects.deepEquals(articles, lecturer.articles) && Objects.equals(professionInstitute, lecturer.professionInstitute);
     }
 
 }
