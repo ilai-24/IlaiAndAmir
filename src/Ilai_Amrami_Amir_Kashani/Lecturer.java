@@ -12,6 +12,7 @@ public class Lecturer {
     private int numOfLecturerCommittees;
     private String[]articles;
     private int numOfArticles;
+    private String professionInstitute;
 
     public Lecturer(String name,int id,eTitle title,String degreeName,double salary){
         setName(name);
@@ -46,6 +47,11 @@ public class Lecturer {
         this.degreeName = degreeName;
 
     }
+
+    public void setProfessionInstitute(String professionInstitute) {
+        this.professionInstitute = professionInstitute;
+    }
+
     public void setDepartment(Department department){
        this.department=department;
    }
@@ -89,6 +95,10 @@ public class Lecturer {
 
     public int getNumOfLecturerCommittees() {
         return numOfLecturerCommittees;
+    }
+
+    public String getProfessionInstitute() {
+        return professionInstitute;
     }
 
     public Committee[] getCommittees() {
