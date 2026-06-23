@@ -1,5 +1,8 @@
 package Ilai_Amrami_Amir_Kashani;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Committee {
     private String name;
     private Lecturer[] committeeFriends;
@@ -77,5 +80,17 @@ public class Committee {
             str.append(" Friends name " + i + ": " + committeeFriends[i].getName() + ", ");
         str.append("\n ChairmanName" + chairMan);
         return str.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Committee committee = (Committee) o;
+        return numOfFriends == committee.numOfFriends && Objects.equals(name, committee.name) && Objects.deepEquals(committeeFriends, committee.committeeFriends) && Objects.equals(chairMan, committee.chairMan);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, Arrays.hashCode(committeeFriends), chairMan, numOfFriends);
     }
 }
