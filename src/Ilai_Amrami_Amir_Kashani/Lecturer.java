@@ -10,6 +10,8 @@ public class Lecturer {
     private double salary;
     private Committee[]committees;
     private int numOfLecturerCommittees;
+    private String[]articles;
+    private int numOfArticles;
 
     public Lecturer(String name,int id,eTitle title,String degreeName,double salary){
         setName(name);
@@ -17,6 +19,8 @@ public class Lecturer {
         setTitle(title);
         setDegreeName(degreeName);
         setSalary(salary);
+        articles=new String[1];
+        numOfArticles=0;
         committees=new Committee[1];
         numOfLecturerCommittees=0;
     }
@@ -45,6 +49,23 @@ public class Lecturer {
     public void setDepartment(Department department){
        this.department=department;
    }
+
+    public void setArticles(String[] articles) {
+        if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
+            this.articles = articles;
+        }
+        else
+            throw new InvalidTitleException("lecturer needs to be a master or doctor");
+
+    }
+    public void addArticles(String article){
+        String[]temp=new String[articles.length*2];
+        for (int i=0;i<numOfArticles;i++)
+            temp[i]=articles[i];
+        temp[numOfArticles]=article;
+        numOfArticles++;
+        articles=temp;
+    }
 
     public String getName() {
         return name;
@@ -105,6 +126,12 @@ public class Lecturer {
         StringBuffer str=new StringBuffer("name: "+name+", id: "+id+", title: "+title+", degree name: "+degreeName+", salary: "+salary+",department: "+department_str+",committees: ");
         for (int i=0;i<numOfLecturerCommittees;i++)
             str.append(committees[i].getName()+", ");
+        if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
+            str.append(",articles:");
+            for (int i = 0; i < numOfArticles; i++)
+                str.append(articles[i] + ", ");
+        }
+
 
         return str.toString();
     }

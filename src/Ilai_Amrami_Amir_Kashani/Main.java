@@ -182,8 +182,8 @@ public class Main {
                 case 11: //toString of all committees
                     System.out.println(college.toStringCommittees());
                     break;
-            }
-        }
+
+        }}
     }
 }
 
