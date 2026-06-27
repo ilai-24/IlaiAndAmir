@@ -1,6 +1,9 @@
 package Ilai_Amrami_Amir_Kashani;
 //checking if it works
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class College {
     public enum eAddLecturer {Succeed, FailedMatchedId, FailedMatchedName, InvalidSalary, FailedNegativeId, FailWorngTitle}
 
@@ -244,6 +247,13 @@ public class College {
         if (depNum == -1)
             return -1;
         return sumSalary(departments[depNum].getLecturers(), departments[depNum].getNumOfLecturers());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        College college = (College) o;
+        return lecturerNum == college.lecturerNum && committeeNum == college.committeeNum && departmentNum == college.departmentNum && Objects.equals(name, college.name) && Objects.deepEquals(lecturers, college.lecturers) && Objects.deepEquals(committees, college.committees) && Objects.deepEquals(departments, college.departments);
     }
 
 }
