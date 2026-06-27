@@ -1,4 +1,5 @@
 package Ilai_Amrami_Amir_Kashani;
+//checking if it works
 
 public class College {
     public enum eAddLecturer {Succeed, FailedMatchedId, FailedMatchedName, InvalidSalary, FailedNegativeId, FailWorngTitle}
