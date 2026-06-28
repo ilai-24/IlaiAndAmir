@@ -64,7 +64,7 @@ public class Lecturer {
             this.articles = articles;
         }
         else
-            throw new InvalidTitleException("lecturer needs to be a master or doctor");
+            throw new ActionException("lecturer needs to be a master or doctor");
 
     }
     public void addArticles(String article){
