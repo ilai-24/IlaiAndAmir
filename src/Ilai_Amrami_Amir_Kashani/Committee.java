@@ -22,25 +22,23 @@ public class Committee {
         return name;
     }
 
-    public College.eAddChairman setChairMan(Lecturer chairMan) {
+    public void setChairMan(Lecturer chairMan) {
         if (chairMan.getTitle() != Lecturer.eTitle.Doctor)
-            return College.eAddChairman.FailChairManIsNotDr;
-
+           throw new ActionException("the chair man is not a doctor");
         if (findFriendIndexByName(chairMan.getName()) != -1) {
-            return College.eAddChairman.FailChairmanIsFriend;
+            throw new ActionException("the chair man is already a friend in the committee");
         }
         if (this.chairMan != null)
             this.chairMan.removeCommittee(this);
         chairMan.addCommittee(this);
         this.chairMan = chairMan;
-        return College.eAddChairman.Succeed;
     }
 
-    public College.eAddFriendToCommittee addFriend(Lecturer friend) {
+    public void addFriend(Lecturer friend) {
         if (chairMan.getName().equals(friend.getName()))
-            return College.eAddFriendToCommittee.FailFriendIsChairMan;
+            throw new ActionException("the chair man is already the chair man of the committee");
         if (findFriendIndexByName(friend.getName()) != -1)
-            return College.eAddFriendToCommittee.FailFriendIsInCommittee;
+            throw new ActionException("the chair man is already a friend in the committee");
 
         friend.addCommittee(this);
         Lecturer[] temp = new Lecturer[committeeFriends.length * 2];
@@ -49,21 +47,18 @@ public class Committee {
         temp[numOfFriends] = friend;
         numOfFriends++;
         committeeFriends = temp;
-        return College.eAddFriendToCommittee.Succeed;
-
     }
 
-    public College.eRemoveFriend removeFriend(Lecturer friend) {
+    public void removeFriend(Lecturer friend) {
         int friendIndex = findFriendIndexByName(friend.getName());
         if (friendIndex == -1)
-            return College.eRemoveFriend.FailFriendNotInCommittee;
+            throw new ActionException("the lecturer isn't a friend in the committee");
         friend.removeCommittee(this);
         numOfFriends--;
 
         Lecturer tempLecturer = committeeFriends[numOfFriends];
         committeeFriends[numOfFriends] = null;
         committeeFriends[friendIndex] = tempLecturer;
-        return College.eRemoveFriend.Succeed;
 
     }
 
@@ -89,8 +84,4 @@ public class Committee {
         return numOfFriends == committee.numOfFriends && Objects.equals(name, committee.name) && Objects.deepEquals(committeeFriends, committee.committeeFriends) && Objects.equals(chairMan, committee.chairMan);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, Arrays.hashCode(committeeFriends), chairMan, numOfFriends);
-    }
 }
