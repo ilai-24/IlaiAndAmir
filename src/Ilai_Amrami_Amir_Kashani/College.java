@@ -176,7 +176,7 @@ public class College {
          committees[committeeIndex].setChairMan(lecturers[chairmanIndex]);
     }
 
-    public void removeF000riend(String friendName, String committeeName) {
+    public void removeFriend(String friendName, String committeeName) {
         int friendIndex = findLecturerIndexByName(friendName);
         if (friendIndex == -1)
             throw new ActionException("the friend doesn't exists");
