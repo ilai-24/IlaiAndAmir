@@ -41,21 +41,18 @@ public class Main {
                     System.out.println("Enter the salary of the lecturer");
                     salary = input.nextDouble();
 
+                    try {
+                        college.addLecturer(name,id,sTitle,degreeName,salary);
+                        System.out.println("Lecturer added successfully");
+                    }
+                    catch (GeneralExceptions e){
+                        System.out.println(e.getMessage());
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("Wrong title");
+                    }
 
-                    College.eAddLecturer resLecturer = college.addLecturer(name, id, sTitle, degreeName, salary);
 
-                    if (resLecturer == College.eAddLecturer.FailedMatchedName)
-                        System.out.println("the lecturer name is already exist. Try again");
-                    if (resLecturer == College.eAddLecturer.FailedMatchedId)
-                        System.out.println("the lecturer id is already exist.Try again");
-                    if (resLecturer == College.eAddLecturer.Succeed)
-                        System.out.println("the lecturer was added");
-                    if (resLecturer == College.eAddLecturer.InvalidSalary)
-                        System.out.println("The salary cant be negative.Try again");
-                    if (resLecturer == College.eAddLecturer.FailedNegativeId)
-                        System.out.println("The ID cant be negative.Try again");
-                    if (resLecturer == College.eAddLecturer.FailWorngTitle)
-                        System.out.println("The title is wrong. Try again");
                     break;
                 case 2: //add a committee
                     System.out.println("Enter the name of the  committee");

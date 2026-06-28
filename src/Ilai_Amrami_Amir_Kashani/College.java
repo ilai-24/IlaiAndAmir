@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class College {
-    public enum eAddLecturer {Succeed, FailedMatchedId, FailedMatchedName, InvalidSalary, FailedNegativeId, FailWorngTitle}
 
     public enum eAddLecturerToDepartment {Succeed, NoLecturerExisted, FailAlreadyExisted, FailNoDepartmentExisted}
 
@@ -71,26 +70,14 @@ public class College {
         return departmentNum;
     }
 
-    public eAddLecturer addLecturer(String name, int id, String title, String degreeName, double salary) {
+    public void  addLecturer(String name, int id, String title, String degreeName, double salary)throws GeneralExceptions,IllegalArgumentException {
         for (int i = 0; i < lecturerNum; i++) {
             if (name.equals(lecturers[i].getName()))
-                return eAddLecturer.FailedMatchedName;
+                throw new GeneralExceptions("the lecturer name is already exist. Try again");
             if (id == lecturers[i].getId())
-                return eAddLecturer.FailedMatchedId;
+                throw new GeneralExceptions("the lecturer id is already exist. Try again");
         }
-        if (salary < 0)
-            return eAddLecturer.InvalidSalary;
-        if (id < 0)
-            return eAddLecturer.FailedNegativeId;
-        Lecturer.eTitle[] eTitles = Lecturer.eTitle.values();
-        Lecturer.eTitle eTitle = null;
-        for (int i = 0; i < eTitles.length; i++) {
-            if (title.equals(eTitles[i].name()))
-                eTitle = eTitles[i];
-        }
-        if (eTitle == null)
-            return eAddLecturer.FailWorngTitle;
-
+        Lecturer.eTitle eTitle = Lecturer.eTitle.valueOf(title);
         Lecturer lecturer = new Lecturer(name, id, eTitle, degreeName, salary);
 
         Lecturer[] temp = new Lecturer[lecturers.length * 2];
@@ -99,8 +86,6 @@ public class College {
         temp[lecturerNum] = lecturer;
         lecturerNum++;
         lecturers = temp;
-        return eAddLecturer.Succeed;
-
     }
 
     public eAddDepartment addDepartment(String name, int numOfStudents) {

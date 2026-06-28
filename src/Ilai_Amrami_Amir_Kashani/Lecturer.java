@@ -17,7 +17,7 @@ public class Lecturer {
     private int numOfArticles;
     private String professionInstitute;
 
-    public Lecturer(String name,int id,eTitle title,String degreeName,double salary){
+    public Lecturer(String name,int id,eTitle title,String degreeName,double salary) throws GeneralExceptions{
         setName(name);
         setId(id);
         setTitle(title);
@@ -33,17 +33,22 @@ public class Lecturer {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(double salary) throws GeneralExceptions {
+        if(salary<0)
+            throw new GeneralExceptions("The salary cant be negative.Try again");
         this.salary = salary;
     }
 
     public void setName(String name){
         this.name=name;
     }
-    public void setId(int id){
+    public void setId(int id) throws GeneralExceptions{
+        if(id<0)
+            throw new GeneralExceptions("The ID cant be negative.Try again");
         this.id=id;
     }
     public void setTitle(eTitle title){
+
         this.title=title;
     }
     public void setDegreeName(String degreeName) {
@@ -59,14 +64,14 @@ public class Lecturer {
        this.department=department;
    }
 
-    public void setArticles(String[] articles) {
-        if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
-            this.articles = articles;
-        }
-        else
-            throw new InvalidTitleException("lecturer needs to be a master or doctor");
-
-    }
+//    public void setArticles(String[] articles) {
+//        if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
+//            this.articles = articles;
+//        }
+//        else
+//            throw new InvalidTitleException("lecturer needs to be a master or doctor");
+//
+//    }
     public void addArticles(String article){
         String[]temp=new String[articles.length*2];
         for (int i=0;i<numOfArticles;i++)
