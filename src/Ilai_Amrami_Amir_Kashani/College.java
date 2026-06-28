@@ -1,6 +1,4 @@
 package Ilai_Amrami_Amir_Kashani;
-//checking if it works
-
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -86,14 +84,15 @@ public class College {
         temp[lecturerNum] = lecturer;
         lecturerNum++;
         lecturers = temp;
+
     }
 
-    public eAddDepartment addDepartment(String name, int numOfStudents) {
+    public void addDepartment(String name, int numOfStudents) {
         if (findDepartmentIndexByName(name) != -1) {
-            return eAddDepartment.FailedMatchedName;
+            throw new ActionException("department with the same name exsists");
         }
         if (numOfStudents < 0) {
-            return eAddDepartment.FailedNegativeNumOfStudents;
+            throw new IllegalArgumentException("number of students cannot be negative.");
         }
 
         if (departmentNum == departments.length) {
@@ -107,74 +106,72 @@ public class College {
         departments[departmentNum] = new Department(name, numOfStudents);
         departmentNum++;
 
-        return eAddDepartment.Succeed;
     }
 
-    public College.eAddLecturerToDepartment addLecturerToDepartment(String department, String lecturer) {
+    public void addLecturerToDepartment(String department, String lecturer) {
         int depIndex = findDepartmentIndexByName(department);
         if (depIndex == -1) {
-            return eAddLecturerToDepartment.FailNoDepartmentExisted;
+            throw new ActionException("department dosent exist");
         }
 
         int lecIndex = findLecturerIndexByName(lecturer);
         if (lecIndex == -1) {
-            return eAddLecturerToDepartment.NoLecturerExisted;
+            throw new ActionException("lecturer dosent exist");
         }
 
-        return departments[depIndex].addLecturer(lecturers[lecIndex]);
+        departments[depIndex].addLecturer(lecturers[lecIndex]);
     }
 
 
-    public eAddCommittee addCommittee(String name, String chairMan) {
+    public void addCommittee(String name, String chairMan) {
         int chairManIndex = findLecturerIndexByName(chairMan);
         if (chairManIndex == -1)
-            return eAddCommittee.FailedChairManNotExisted;
+            throw new ActionException("chair man dosent exist");
         if (findCommitteeIndexByName(name) != -1)
-            return eAddCommittee.FailedMatchName;
-        Committee committee = new Committee(name);
+            throw new ActionException("comittee dosent exist");
 
-        eAddChairman res = committee.setChairMan(lecturers[chairManIndex]);
-        if (res == eAddChairman.FailChairManIsNotDr)
-            return eAddCommittee.FailedChairmanNotDoctor;
+        Committee committee = new Committee(name);
+        committee.setChairMan(lecturers[chairManIndex]);
         Committee[] temp = new Committee[committees.length * 2];
         for (int j = 0; j < committeeNum; j++)
             temp[j] = committees[j];
         temp[committeeNum] = committee;
         committeeNum++;
         committees = temp;
-        return eAddCommittee.Succeed;
     }
 
-    public eAddFriendToCommittee addCommitteeFriend(String committeeName, String friendName) {
+    public void addCommitteeFriend(String committeeName, String friendName) {
         int friendIndex = findLecturerIndexByName(friendName);
         if (friendIndex == -1)
-            return eAddFriendToCommittee.FailNoFriendExisted;
+            throw new ActionException("the friend doesn't exists");
+
         int committeeIndex = findCommitteeIndexByName(committeeName);
         if (committeeIndex == -1)
-            return eAddFriendToCommittee.FailNoCommitteeExisted;
-
-        return committees[committeeIndex].addFriend(lecturers[friendIndex]);
+            throw new ActionException("the committee doesn't exists");
+        committees[committeeIndex].addFriend(lecturers[friendIndex]);
     }
 
-    public eAddChairman addChairmanToCommittee(String CommitteeName, String chairmanName) {
+    public void addChairmanToCommittee(String CommitteeName, String chairmanName) {
         int committeeIndex = findCommitteeIndexByName(CommitteeName);
         if (committeeIndex == -1)
-            return eAddChairman.FailNoCommitteeExisted;
+            throw new ActionException("the committee doesn't exists");
         int chairmanIndex = findLecturerIndexByName(chairmanName);
         if (chairmanIndex == -1)
-            return eAddChairman.FailNoChairmanExisted;
+            throw new ActionException("the chair man doesn't exists");
 
-        return committees[committeeIndex].setChairMan(lecturers[chairmanIndex]);
+
+         committees[committeeIndex].setChairMan(lecturers[chairmanIndex]);
     }
 
-    public eRemoveFriend removeFriend(String friendName, String committeeName) {
+    public void removeFriend(String friendName, String committeeName) {
         int friendIndex = findLecturerIndexByName(friendName);
         if (friendIndex == -1)
-            return eRemoveFriend.FailNoFriendExisted;
+            throw new ActionException("the friend doesn't exists");
+
         int committeeIndex = findCommitteeIndexByName(committeeName);
         if (committeeIndex == -1)
-            return eRemoveFriend.FailNoCommitteeExisted;
-        return committees[committeeIndex].removeFriend(lecturers[friendIndex]);
+            throw new ActionException("the committee doesn't exists");
+         committees[committeeIndex].removeFriend(lecturers[friendIndex]);
     }
 
     public int findLecturerIndexByName(String name) {

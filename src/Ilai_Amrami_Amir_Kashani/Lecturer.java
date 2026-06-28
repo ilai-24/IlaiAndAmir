@@ -64,14 +64,14 @@ public class Lecturer {
        this.department=department;
    }
 
-//    public void setArticles(String[] articles) {
-//        if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
-//            this.articles = articles;
-//        }
-//        else
-//            throw new InvalidTitleException("lecturer needs to be a master or doctor");
-//
-//    }
+    public void setArticles(String[] articles) {
+        if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
+            this.articles = articles;
+        }
+        else
+            throw new ActionException("lecturer needs to be a master or doctor");
+
+    }
     public void addArticles(String article){
         String[]temp=new String[articles.length*2];
         for (int i=0;i<numOfArticles;i++)

@@ -22,7 +22,7 @@ public class Main {
             case_num = input.nextInt();
             while (case_num < 0 || case_num > 11) {
                 System.out.println("Wrong function number. Enter the function number[0,11] you want to use");
-                case_num = input.nextInt(); 
+                case_num = input.nextInt();
             }
 
             switch (case_num) {
@@ -149,13 +149,6 @@ public class Main {
                     System.out.println("Enter the name of the department");
                     String depName = input.next();
                     College.eAddLecturerToDepartment resultAddLecturerToDepartmet = college.addLecturerToDepartment(depName, lecName);
-                    if (resultAddLecturerToDepartmet == College.eAddLecturerToDepartment.FailNoDepartmentExisted)
-                        System.out.println("The department doesnt exist.Try again");
-                    if (resultAddLecturerToDepartmet == College.eAddLecturerToDepartment.NoLecturerExisted)
-                        System.out.println("The lecturer doesnt exist.Try again");
-                    if (resultAddLecturerToDepartmet == College.eAddLecturerToDepartment.FailAlreadyExisted)
-                        System.out.println("The lecturer is already in a department.Try again");
-                    if ((resultAddLecturerToDepartmet == College.eAddLecturerToDepartment.Succeed))
                         System.out.println("The lecturer was added to the department successfully");
                     break;
 
@@ -180,7 +173,8 @@ public class Main {
                     System.out.println(college.toStringCommittees());
                     break;
 
-        }}
+
+        }
     }
 }
 
