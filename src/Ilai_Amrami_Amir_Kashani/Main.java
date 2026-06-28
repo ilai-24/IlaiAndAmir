@@ -22,7 +22,7 @@ public class Main {
             case_num = input.nextInt();
             while (case_num < 0 || case_num > 11) {
                 System.out.println("Wrong function number. Enter the function number[0,11] you want to use");
-                case_num = input.nextInt(); 
+                case_num = input.nextInt();
             }
 
             switch (case_num) {
@@ -182,6 +182,7 @@ public class Main {
                 case 11: //toString of all committees
                     System.out.println(college.toStringCommittees());
                     break;
+
             }
         }
     }
