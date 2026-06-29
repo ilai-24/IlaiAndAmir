@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Lecturer {
-    public enum eTitle{Bachelor, Master, Doctor}
+    public enum eTitle{Bachelor, Master, Doctor,Professor}
     private eTitle title;
     private String name;
     private int id;
@@ -73,7 +73,7 @@ public class Lecturer {
 
     }
     public void addArticles(String article){
-        if (this.title!=eTitle.Doctor||this.title!=eTitle.Profesor)
+        if (this.title!=eTitle.Doctor&&this.title!=eTitle.Professor)
             throw new ActionException(this.name+" is not a professor or a doctor");
         String[] temp = new String[articles.length * 2];
         for (int i = 0; i < numOfArticles; i++)
@@ -84,7 +84,7 @@ public class Lecturer {
     }
 
     public int getNumOfArticles() {
-        if (this.title!=eTitle.Doctor||this.title!=eTitle.Profesor)
+        if (this.title!=eTitle.Doctor&&this.title!=eTitle.Professor)
             throw new ActionException(this.name+" is not a professor or a doctor");
         return numOfArticles;
     }

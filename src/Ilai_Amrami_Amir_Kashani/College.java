@@ -108,7 +108,7 @@ public class College {
 
     }
 
-    public void addLecturerToDepartment(String department, String lecturer) {
+    public void addLecturerToDepartment(String department, String lecturer) throws ActionException{
         int depIndex = findDepartmentIndexByName(department);
         if (depIndex == -1) {
             throw new ActionException("department dosent exist");
@@ -123,7 +123,7 @@ public class College {
     }
 
 
-    public void addCommittee(String name, String chairMan) {
+    public void addCommittee(String name, String chairMan) throws ActionException{
         int chairManIndex = findLecturerIndexByName(chairMan);
         if (chairManIndex == -1)
             throw new ActionException("chair man dosent exist");
@@ -140,7 +140,7 @@ public class College {
         committees = temp;
     }
 
-    public void addCommitteeFriend(String committeeName, String friendName) {
+    public void addCommitteeFriend(String committeeName, String friendName)throws ActionException {
         int friendIndex = findLecturerIndexByName(friendName);
         if (friendIndex == -1)
             throw new ActionException("the friend doesn't exists");
@@ -151,7 +151,7 @@ public class College {
         committees[committeeIndex].addFriend(lecturers[friendIndex]);
     }
 
-    public void addChairmanToCommittee(String CommitteeName, String chairmanName) {
+    public void addChairmanToCommittee(String CommitteeName, String chairmanName)throws ActionException {
         int committeeIndex = findCommitteeIndexByName(CommitteeName);
         if (committeeIndex == -1)
             throw new ActionException("the committee doesn't exists");
@@ -163,7 +163,7 @@ public class College {
          committees[committeeIndex].setChairMan(lecturers[chairmanIndex]);
     }
 
-    public void removeFriend(String friendName, String committeeName) {
+    public void removeFriend(String friendName, String committeeName)throws ActionException {
         int friendIndex = findLecturerIndexByName(friendName);
         if (friendIndex == -1)
             throw new ActionException("the friend doesn't exists");
@@ -205,7 +205,8 @@ public class College {
         return str.toString();
     }
 
-    public String toStringCommittees() {
+    public String toStringCommittees()
+    {
         StringBuffer str = new StringBuffer(name + " committees:");
         for (int i = 0; i < committeeNum; i++)
             str.append("\n" + committees[i].toString());
@@ -213,20 +214,20 @@ public class College {
 
     }
 
-    public double sumSalary(Lecturer[] lecturers, int numOfLecturers) {
+    public double sumSalary(Lecturer[] lecturers, int numOfLecturers) throws ActionException {
         double sumSalary = 0;
         for (int i = 0; i < numOfLecturers; i++)
             sumSalary += lecturers[i].getSalary();
         return sumSalary / numOfLecturers;
     }
 
-    public double AvgSalary() {
+    public double AvgSalary() throws ActionException{
         if (lecturerNum ==0)
             throw new ActionException("there are no lecturers in the requested field");
         return sumSalary(lecturers, lecturerNum);
     }
 
-    public double departmentAvgSalary(String department) {
+    public double departmentAvgSalary(String department) throws ActionException{
         int depNum = findDepartmentIndexByName(department);
         if (depNum == -1)
             throw new ActionException("the department doesn't exists");
@@ -249,6 +250,17 @@ public class College {
             throw new ActionException("the lecturer dosent exist");
         lecturers[index].addArticles(art);
     }
+    public boolean compareNumOfLec(String c1, String c2) throws ActionException
+    {
+        int c1Index=findCommitteeIndexByName(c1);
+        int c2Index=findCommitteeIndexByName(c2);
+        if(c1Index==-1)
+            throw new ActionException("the first committee doesn't exist");
+        if(c2Index==-1)
+            throw new ActionException("the second committee doesn't exist");
+        return committees[c1Index].getNumOfFriends()==committees[c2Index].getNumOfFriends();
+    }
+
 
     @Override
     public boolean equals(Object o) {

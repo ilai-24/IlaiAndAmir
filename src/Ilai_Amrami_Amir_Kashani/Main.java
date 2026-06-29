@@ -19,9 +19,9 @@ public class Main {
         College college = new College(name);
 
         while (exit) {
-            System.out.println("enter the function number[0,13] you want to use");
+            System.out.println("enter the function number[0,14] you want to use");
             case_num = input.nextInt();
-            while (case_num < 0 || case_num > 13) {
+            while (case_num < 0 || case_num > 14) {
                 System.out.println("Wrong function number. Enter the function number[0,11] you want to use");
                 case_num = input.nextInt();
             }
@@ -180,10 +180,11 @@ public class Main {
                 case 12: // adding article
                     System.out.println("Enter the name of the lecturer");
                     String lec = input.next();
-                    System.out.println("Enter the name of the department");
+                    System.out.println("Enter the name of the article");
                     String art = input.next();
                     try {
                         college.addArticlesByName(lec, art);
+                        System.out.println("article was added successfully");
                     }
                     catch (ActionException e) {
                         System.out.println(e.getMessage());
@@ -200,6 +201,26 @@ public class Main {
                     String lec2 = input.next();
                     try {
                         if (college.compareArticles(lec1,lec2)) {
+                            System.out.println("they have equal amount");
+                            break;
+                        }
+                        System.out.println("they dont have equal amount");
+                    }
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
+                    break;
+
+                case 14://comparing comeittees num of lec
+                    System.out.println("Enter the name of the first committee");
+                    String com1 = input.next();
+
+                    System.out.println("Enter the name of the second committee");
+                    String com2 = input.next();
+                    try {
+                        if (college.compareArticles(com1,com2)) {
                             System.out.println("they have equal amount");
                             break;
                         }

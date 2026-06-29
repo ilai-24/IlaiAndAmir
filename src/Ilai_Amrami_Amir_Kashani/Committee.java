@@ -22,6 +22,10 @@ public class Committee {
         return name;
     }
 
+    public int getNumOfFriends() {
+        return numOfFriends;
+    }
+
     public void setChairMan(Lecturer chairMan) {
         if (chairMan.getTitle() != Lecturer.eTitle.Doctor)
            throw new ActionException("the chair man is not a doctor");
