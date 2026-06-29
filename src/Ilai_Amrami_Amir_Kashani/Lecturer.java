@@ -17,7 +17,7 @@ public class Lecturer {
     private int numOfArticles;
     private String professionInstitute;
 
-    public Lecturer(String name,int id,eTitle title,String degreeName,double salary) throws GeneralExceptions{
+    public Lecturer(String name,int id,eTitle title,String degreeName,double salary){
         setName(name);
         setId(id);
         setTitle(title);
@@ -33,18 +33,18 @@ public class Lecturer {
         return salary;
     }
 
-    public void setSalary(double salary) throws GeneralExceptions {
+    public void setSalary(double salary){
         if(salary<0)
-            throw new GeneralExceptions("The salary cant be negative.Try again");
+            throw new ActionException("The salary cant be negative.Try again");
         this.salary = salary;
     }
 
     public void setName(String name){
         this.name=name;
     }
-    public void setId(int id) throws GeneralExceptions{
+    public void setId(int id) {
         if(id<0)
-            throw new GeneralExceptions("The ID cant be negative.Try again");
+            throw new ActionException("The ID cant be negative.Try again");
         this.id=id;
     }
     public void setTitle(eTitle title){
