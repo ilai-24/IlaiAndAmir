@@ -26,6 +26,22 @@ public class Committee {
         return numOfFriends;
     }
 
+    public Lecturer getChairMan() {
+        return chairMan;
+    }
+
+    public Lecturer[] getCommitteeFriends() {
+        return committeeFriends;
+    }
+
+    public void setCommitteeFriends(Lecturer[] committeeFriends) {
+        this.committeeFriends = committeeFriends;
+    }
+
+    public void setNumOfFriends(int numOfFriends) {
+        this.numOfFriends = numOfFriends;
+    }
+
     public void setChairMan(Lecturer chairMan) {
         if (chairMan.getTitle() != Lecturer.eTitle.Doctor)
            throw new ActionException("the chair man is not a doctor");

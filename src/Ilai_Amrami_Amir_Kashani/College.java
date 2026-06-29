@@ -260,6 +260,17 @@ public class College {
             throw new ActionException("the second committee doesn't exist");
         return committees[c1Index].getNumOfFriends()==committees[c2Index].getNumOfFriends();
     }
+    public void copyCommittee(String com) throws ActionException
+    {
+        int index=findCommitteeIndexByName(com);
+        if(index==-1)
+            throw new ActionException("the committee doesn't exist");
+        addCommittee("new "+committees[index].getName(),committees[index].getChairMan().getName());
+        if (committees[index].getNumOfFriends()!=0) {
+            committees[committeeNum].setNumOfFriends(committees[index].getNumOfFriends());
+            committees[committeeNum].setCommitteeFriends(committees[index].getCommitteeFriends());
+        }
+    }
 
 
     @Override

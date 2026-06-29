@@ -19,9 +19,9 @@ public class Main {
         College college = new College(name);
 
         while (exit) {
-            System.out.println("enter the function number[0,14] you want to use");
+            System.out.println("enter the function number[0,15] you want to use");
             case_num = input.nextInt();
-            while (case_num < 0 || case_num > 14) {
+            while (case_num < 0 || case_num > 15) {
                 System.out.println("Wrong function number. Enter the function number[0,11] you want to use");
                 case_num = input.nextInt();
             }
@@ -225,6 +225,21 @@ public class Main {
                             break;
                         }
                         System.out.println("they dont have equal amount");
+                    }
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
+                    break;
+
+                case 15://copying a committee
+                    System.out.println("Enter the name of the committee");
+                    String com = input.next();
+
+                    try {
+                        college.copyCommittee(com);
+                            System.out.println("the committee was copied successfully");
                     }
                     catch (ActionException e) {
                         System.out.println(e.getMessage());
