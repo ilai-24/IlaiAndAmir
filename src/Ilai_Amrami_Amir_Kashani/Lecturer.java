@@ -73,12 +73,20 @@ public class Lecturer {
 
     }
     public void addArticles(String article){
-        String[]temp=new String[articles.length*2];
-        for (int i=0;i<numOfArticles;i++)
-            temp[i]=articles[i];
-        temp[numOfArticles]=article;
+        if (this.title!=eTitle.Doctor||this.title!=eTitle.Profesor)
+            throw new ActionException(this.name+" is not a professor or a doctor");
+        String[] temp = new String[articles.length * 2];
+        for (int i = 0; i < numOfArticles; i++)
+            temp[i] = articles[i];
+        temp[numOfArticles] = article;
         numOfArticles++;
-        articles=temp;
+        articles = temp;
+    }
+
+    public int getNumOfArticles() {
+        if (this.title!=eTitle.Doctor||this.title!=eTitle.Profesor)
+            throw new ActionException(this.name+" is not a professor or a doctor");
+        return numOfArticles;
     }
 
     public String getName() {

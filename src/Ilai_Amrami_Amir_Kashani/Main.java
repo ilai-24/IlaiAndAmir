@@ -1,5 +1,6 @@
 package Ilai_Amrami_Amir_Kashani;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -18,9 +19,9 @@ public class Main {
         College college = new College(name);
 
         while (exit) {
-            System.out.println("enter the function number[0,11] you want to use");
+            System.out.println("enter the function number[0,13] you want to use");
             case_num = input.nextInt();
-            while (case_num < 0 || case_num > 11) {
+            while (case_num < 0 || case_num > 13) {
                 System.out.println("Wrong function number. Enter the function number[0,11] you want to use");
                 case_num = input.nextInt();
             }
@@ -176,7 +177,40 @@ public class Main {
                     System.out.println(college.toStringCommittees());
                     break;
 
+                case 12: // adding article
+                    System.out.println("Enter the name of the lecturer");
+                    String lec = input.next();
+                    System.out.println("Enter the name of the department");
+                    String art = input.next();
+                    try {
+                        college.addArticlesByName(lec, art);
+                    }
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
+                    break;
 
+                case 13://comparing articles
+                    System.out.println("Enter the name of the first lecturer");
+                    String lec1 = input.next();
+
+                    System.out.println("Enter the name of the second lecturer");
+                    String lec2 = input.next();
+                    try {
+                        if (college.compareArticles(lec1,lec2)) {
+                            System.out.println("they have equal amount");
+                            break;
+                        }
+                        System.out.println("they dont have equal amount");
+                    }
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
+                    break;
             }
         }
     }
