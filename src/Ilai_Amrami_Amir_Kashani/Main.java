@@ -42,13 +42,11 @@ public class Main {
                     salary = input.nextDouble();
 
                     try {
-                        college.addLecturer(name,id,sTitle,degreeName,salary);
+                        college.addLecturer(name, id, sTitle, degreeName, salary);
                         System.out.println("Lecturer added successfully");
-                    }
-                    catch (GeneralExceptions e){
+                    } catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    }
-                    catch (IllegalArgumentException e) {
+                    } catch (IllegalArgumentException e) {
                         System.out.println("Wrong title");
                     }
 
@@ -60,16 +58,14 @@ public class Main {
                     System.out.println("Enter the name of the chair man");
                     chairMan = input.next();
 
-                    College.eAddCommittee resCommittee = college.addCommittee(committee, chairMan);
-                    if (resCommittee == College.eAddCommittee.FailedChairmanNotDoctor)
-                        System.out.println("The chairMan is not a Dr. Try again");
-                    if (resCommittee == College.eAddCommittee.FailedChairManNotExisted)
-                        System.out.println("The chairMan doesnt exist in the college.Try again");
-                    if (resCommittee == College.eAddCommittee.FailedMatchName)
-                        System.out.println("There is already a committee with the same name.Try again");
-                    if (resCommittee == College.eAddCommittee.Succeed)
+                    try {
+                        college.addCommittee(committee, chairMan);
                         System.out.println("The committee was added successfully");
-
+                    } catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
 
                     break;
                 case 3: //add a friend to the committee
@@ -78,18 +74,14 @@ public class Main {
 
                     System.out.println("Enter the name of the new committee friend (lecturer)");
                     name = input.next();
-                    College.eAddFriendToCommittee resultAddFriendToCommittee = college.addCommitteeFriend(committee, name);
-
-                    if (resultAddFriendToCommittee == College.eAddFriendToCommittee.FailFriendIsInCommittee)
-                        System.out.println("The friend is already  in the committee. Try again");
-                    if (resultAddFriendToCommittee == College.eAddFriendToCommittee.FailFriendIsChairMan)
-                        System.out.println("The friend is the chair man.Try again");
-                    if (resultAddFriendToCommittee == College.eAddFriendToCommittee.FailNoFriendExisted)
-                        System.out.println("The friend doesnt exist in the college");
-                    if (resultAddFriendToCommittee == College.eAddFriendToCommittee.FailNoCommitteeExisted)
-                        System.out.println("The committee doesnt exist.Try again");
-                    if (resultAddFriendToCommittee == College.eAddFriendToCommittee.Succeed)
+                    try {
+                        college.addCommitteeFriend(committee, name);
                         System.out.println("The friend was successfully added");
+                    } catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
                     break;
                 case 4: //add new chairman
                     System.out.println("Enter the name of the  committee");
@@ -97,19 +89,14 @@ public class Main {
 
                     System.out.println("Enter the name of the  chairman");
                     chairMan = input.next();
-                    College.eAddChairman resAddChairman = college.addChairmanToCommittee(committee, chairMan);
-
-                    if (resAddChairman == College.eAddChairman.FailChairManIsNotDr)
-                        System.out.println("The chairMan is not a doctor. Try again");
-                    if ((resAddChairman == College.eAddChairman.FailChairmanIsFriend))
-                        System.out.println("The chairman is a friend in the committee. Try again");
-                    if (resAddChairman == College.eAddChairman.FailNoCommitteeExisted)
-                        System.out.println("The committee doesnt exist.Try again");
-                    if (resAddChairman == College.eAddChairman.FailNoChairmanExisted)
-                        System.out.println("The chairman doesnt exist.Try again");
-                    if (resAddChairman == College.eAddChairman.Succeed)
+                    try {
+                        college.addChairmanToCommittee(committee, chairMan);
                         System.out.println("The chairman was added successfully");
-
+                    } catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
                     break;
 
                 case 5: //remove friend from Committee
@@ -118,16 +105,14 @@ public class Main {
                     System.out.println("Enter the friend you would like to remove");
                     name = input.next();
 
-                    College.eRemoveFriend resultRemoveFriend = college.removeFriend(name, committee);
-
-                    if (resultRemoveFriend == College.eRemoveFriend.FailNoFriendExisted)
-                        System.out.println("The friend doesnt exist in the college.Try again");
-                    if (resultRemoveFriend == College.eRemoveFriend.FailNoCommitteeExisted)
-                        System.out.println("The committee doesnt exist.Try again");
-                    if (resultRemoveFriend == College.eRemoveFriend.FailFriendNotInCommittee)
-                        System.out.println("The friend is not in the committee.Try again");
-                    if (resultRemoveFriend == College.eRemoveFriend.Succeed)
+                    try {
+                        college.removeFriend(name, committee);
                         System.out.println("The friend was successfully removed.");
+                    } catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
                     break;
 
                 case 6: //add a new department
@@ -135,21 +120,28 @@ public class Main {
                     String departmentName = input.next();
                     System.out.println("Enter the amount of students");
                     int studentsNum = input.nextInt();
-                    College.eAddDepartment resultAddDepartment = college.addDepartment(departmentName, studentsNum);
-                    if (resultAddDepartment == College.eAddDepartment.FailedMatchedName)
-                        System.out.println("The department name is already exist. Try again");
-                    if (resultAddDepartment == College.eAddDepartment.FailedNegativeNumOfStudents)
-                        System.out.println("The num of students cant be negative.Try again");
-                    if (resultAddDepartment == College.eAddDepartment.Succeed)
+                    try {
+                        college.addDepartment(departmentName, studentsNum);
                         System.out.println("The department was added successfully");
+                    } catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
                     break;
                 case 7://add a lecturer to a department
                     System.out.println("Enter the name of the  lecturer");
                     String lecName = input.next();
                     System.out.println("Enter the name of the department");
                     String depName = input.next();
-                    College.eAddLecturerToDepartment resultAddLecturerToDepartmet = college.addLecturerToDepartment(depName, lecName);
+                    try {
+                        college.addLecturerToDepartment(depName, lecName);
                         System.out.println("The lecturer was added to the department successfully");
+                    } catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
                     break;
 
                 case 8: //average of all the lecturers salary in the college
@@ -174,6 +166,7 @@ public class Main {
                     break;
 
 
+            }
         }
     }
 }

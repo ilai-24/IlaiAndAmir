@@ -68,12 +68,12 @@ public class College {
         return departmentNum;
     }
 
-    public void  addLecturer(String name, int id, String title, String degreeName, double salary)throws GeneralExceptions,IllegalArgumentException {
+    public void  addLecturer(String name, int id, String title, String degreeName, double salary)throws ActionException,IllegalArgumentException {
         for (int i = 0; i < lecturerNum; i++) {
             if (name.equals(lecturers[i].getName()))
-                throw new GeneralExceptions("the lecturer name is already exist. Try again");
+                throw new ActionException("the lecturer name is already exist. Try again");
             if (id == lecturers[i].getId())
-                throw new GeneralExceptions("the lecturer id is already exist. Try again");
+                throw new ActionException("the lecturer id is already exist. Try again");
         }
         Lecturer.eTitle eTitle = Lecturer.eTitle.valueOf(title);
         Lecturer lecturer = new Lecturer(name, id, eTitle, degreeName, salary);
