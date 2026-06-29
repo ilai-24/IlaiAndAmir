@@ -221,13 +221,15 @@ public class College {
     }
 
     public double AvgSalary() {
+        if (lecturerNum ==0)
+            throw new ActionException("there are no lecturers in the requested field");
         return sumSalary(lecturers, lecturerNum);
     }
 
     public double departmentAvgSalary(String department) {
         int depNum = findDepartmentIndexByName(department);
         if (depNum == -1)
-            return -1;
+            throw new ActionException("the department doesn't exists");
         return sumSalary(departments[depNum].getLecturers(), departments[depNum].getNumOfLecturers());
     }
 

@@ -145,18 +145,29 @@ public class Main {
                     break;
 
                 case 8: //average of all the lecturers salary in the college
-                    System.out.println("The salary average of the whole college is: " + college.AvgSalary());
+                    try {
+                        double avg = college.AvgSalary();
+                        System.out.println("The salary average of the college is: " + avg);
+                    }
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
                     break;
 
                 case 9: //average of all the lecturers in a specific department
                     System.out.println("Enter the name of the department");
                     String dep = input.next();
-                    double avg = college.departmentAvgSalary(dep);
-                    if (avg == -1) {
-                        System.out.println("The department doesnt exist.");
-                        break;
+                    try {
+                        double avg = college.departmentAvgSalary(dep);
+                        System.out.println("The salary average of the department is: " + avg);
                     }
-                    System.out.println("The salary average of the department is: " + avg);
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Wrong form of input");
+                    }
                     break;
                 case 10: //toString of all lecturers
                     System.out.println(college.toStringLecturers());
