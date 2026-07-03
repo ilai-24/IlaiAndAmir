@@ -87,7 +87,7 @@ public class College {
 
     }
 
-    public void addDepartment(String name, int numOfStudents) {
+    public void addDepartment(String name, int numOfStudents) throws ActionException {
         if (findDepartmentIndexByName(name) != -1) {
             throw new ActionException("department with the same name exsists");
         }

@@ -42,7 +42,7 @@ public class Committee {
         this.numOfFriends = numOfFriends;
     }
 
-    public void setChairMan(Lecturer chairMan) {
+    public void setChairMan(Lecturer chairMan) throws  ActionException {
         if (chairMan.getTitle() != Lecturer.eTitle.Doctor)
            throw new ActionException("the chair man is not a doctor");
         if (findFriendIndexByName(chairMan.getName()) != -1) {
@@ -54,7 +54,7 @@ public class Committee {
         this.chairMan = chairMan;
     }
 
-    public void addFriend(Lecturer friend) {
+    public void addFriend(Lecturer friend)throws ActionException {
         if (chairMan.getName().equals(friend.getName()))
             throw new ActionException("the chair man is already the chair man of the committee");
         if (findFriendIndexByName(friend.getName()) != -1)
@@ -69,7 +69,7 @@ public class Committee {
         committeeFriends = temp;
     }
 
-    public void removeFriend(Lecturer friend) {
+    public void removeFriend(Lecturer friend) throws ActionException {
         int friendIndex = findFriendIndexByName(friend.getName());
         if (friendIndex == -1)
             throw new ActionException("the lecturer isn't a friend in the committee");

@@ -17,7 +17,7 @@ public class Lecturer {
     private int numOfArticles;
     private String professionInstitute;
 
-    public Lecturer(String name,int id,eTitle title,String degreeName,double salary){
+    public Lecturer(String name,int id,eTitle title,String degreeName,double salary)throws ActionException {
         setName(name);
         setId(id);
         setTitle(title);
@@ -33,7 +33,7 @@ public class Lecturer {
         return salary;
     }
 
-    public void setSalary(double salary){
+    public void setSalary(double salary)throws  ActionException {
         if(salary<0)
             throw new ActionException("The salary cant be negative.Try again");
         this.salary = salary;
@@ -42,7 +42,7 @@ public class Lecturer {
     public void setName(String name){
         this.name=name;
     }
-    public void setId(int id) {
+    public void setId(int id)throws ActionException {
         if(id<0)
             throw new ActionException("The ID cant be negative.Try again");
         this.id=id;
@@ -64,7 +64,7 @@ public class Lecturer {
        this.department=department;
    }
 
-    public void setArticles(String[] articles) {
+    public void setArticles(String[] articles) throws  ActionException {
         if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
             this.articles = articles;
         }
@@ -72,7 +72,7 @@ public class Lecturer {
             throw new ActionException("lecturer needs to be a master or doctor");
 
     }
-    public void addArticles(String article){
+    public void addArticles(String article)throws ActionException {
         if (this.title!=eTitle.Doctor&&this.title!=eTitle.Professor)
             throw new ActionException(this.name+" is not a professor or a doctor");
         String[] temp = new String[articles.length * 2];
@@ -83,7 +83,7 @@ public class Lecturer {
         articles = temp;
     }
 
-    public int getNumOfArticles() {
+    public int getNumOfArticles()throws ActionException {
         if (this.title!=eTitle.Doctor&&this.title!=eTitle.Professor)
             throw new ActionException(this.name+" is not a professor or a doctor");
         return numOfArticles;
