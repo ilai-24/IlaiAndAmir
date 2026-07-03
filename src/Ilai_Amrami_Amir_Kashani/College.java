@@ -95,21 +95,16 @@ public class College {
 
     public void addDepartment(String name, int numOfStudents) throws ActionException {
         if (findDepartmentIndexByName(name) != -1) {
-            throw new ActionException("department with the same name exsists");
+            throw new ActionException("department with the same name is already exists");
         }
-        if (numOfStudents < 0) {
-            throw new IllegalArgumentException("number of students cannot be negative.");
-        }
+        Department department = new Department(name, numOfStudents);
 
-        if (departmentNum == departments.length) {
-            Department[] temp = new Department[departments.length * 2];
-            for (int j = 0; j < departmentNum; j++) {
-                temp[j] = departments[j];
-            }
-            departments = temp;
+        Department[] temp = new Department[departments.length * 2];
+        for (int j = 0; j < departmentNum; j++) {
+            temp[j] = departments[j];
         }
-
-        departments[departmentNum] = new Department(name, numOfStudents);
+        departments = temp;
+        departments[departmentNum] = department;
         departmentNum++;
 
     }

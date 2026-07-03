@@ -9,7 +9,7 @@ public class Department {
     private int numOfStudents;
     private int numOfLecturers = 0;
 
-    public Department(String name, int numOfStudents) {
+    public Department(String name, int numOfStudents)throws ActionException {
         setName(name);
         setNumOfStudents(numOfStudents);
         this.lecturers = new Lecturer[1];
@@ -23,7 +23,9 @@ public class Department {
         this.lecturers = lecturers;
     }
 
-    public void setNumOfStudents(int numOfStudents) {
+    public void setNumOfStudents(int numOfStudents) throws ActionException {
+        if (numOfStudents < 0)
+            throw new IllegalArgumentException("number of students cannot be negative.");
         this.numOfStudents = numOfStudents;
     }
 
