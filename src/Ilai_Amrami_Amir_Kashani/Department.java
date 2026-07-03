@@ -25,7 +25,7 @@ public class Department {
 
     public void setNumOfStudents(int numOfStudents) throws ActionException {
         if (numOfStudents < 0)
-            throw new IllegalArgumentException("number of students cannot be negative.");
+            throw new ActionException("number of students cannot be negative.");
         this.numOfStudents = numOfStudents;
     }
 
