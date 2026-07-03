@@ -57,9 +57,9 @@ public class Committee {
 
     public void addFriend(Lecturer friend)throws ActionException {
         if (chairMan.getName().equals(friend.getName()))
-            throw new ActionException("the chair man is already the chair man of the committee");
+            throw new ActionException("the friend is already the chair man of the committee");
         if (findFriendIndexByName(friend.getName()) != -1)
-            throw new ActionException("the chair man is already a friend in the committee");
+            throw new ActionException("the friend is already a friend in the committee");
 
         friend.addCommittee(this);
         Lecturer[] temp = new Lecturer[committeeFriends.length * 2];
