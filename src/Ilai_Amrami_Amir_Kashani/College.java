@@ -68,14 +68,20 @@ public class College {
         return departmentNum;
     }
 
-    public void  addLecturer(String name, int id, String title, String degreeName, double salary)throws ActionException,IllegalArgumentException {
+    public void  addLecturer(String name, int id, String title, String degreeName, double salary)throws ActionException {
         for (int i = 0; i < lecturerNum; i++) {
             if (name.equals(lecturers[i].getName()))
                 throw new ActionException("the lecturer name is already exist. Try again");
             if (id == lecturers[i].getId())
                 throw new ActionException("the lecturer id is already exist. Try again");
         }
-        Lecturer.eTitle eTitle = Lecturer.eTitle.valueOf(title);
+        Lecturer.eTitle eTitle;
+        try {
+                eTitle = Lecturer.eTitle.valueOf(title);
+        }
+        catch (IllegalArgumentException e) {
+            throw  new ActionException("the lecturer Title is wrong. Try again");
+        }
         Lecturer lecturer = new Lecturer(name, id, eTitle, degreeName, salary);
 
         Lecturer[] temp = new Lecturer[lecturers.length * 2];
@@ -126,12 +132,12 @@ public class College {
     public void addCommittee(String name, String chairMan) throws ActionException{
         int chairManIndex = findLecturerIndexByName(chairMan);
         if (chairManIndex == -1)
-            throw new ActionException("chair man dosent exist");
+            throw new ActionException("chair man doesnt exist");
         if (findCommitteeIndexByName(name) != -1)
-            throw new ActionException("comittee dosent exist");
+            throw new ActionException("committee name is already exist");
 
-        Committee committee = new Committee(name);
-        committee.setChairMan(lecturers[chairManIndex]);
+        Committee committee = new Committee(name,lecturers[chairManIndex]);
+
         Committee[] temp = new Committee[committees.length * 2];
         for (int j = 0; j < committeeNum; j++)
             temp[j] = committees[j];

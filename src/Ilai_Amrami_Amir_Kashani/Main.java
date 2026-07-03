@@ -35,7 +35,7 @@ public class Main {
                     name = input.next();
                     System.out.println("Enter the id of the lecturer ");
                     id = input.nextInt();
-                    System.out.println("Enter the title of the lecturer (Bachelor,Master,Doctor) ");
+                    System.out.println("Enter the title of the lecturer (Bachelor,Master,Doctor,Professor) ");
                     sTitle = input.next();
                     System.out.println("Enter the degree name of the lecturer ");
                     degreeName = input.next();
@@ -47,8 +47,6 @@ public class Main {
                         System.out.println("Lecturer added successfully");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong title");
                     }
 
 

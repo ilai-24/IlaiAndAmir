@@ -9,8 +9,9 @@ public class Committee {
     private Lecturer chairMan;
     private int numOfFriends;
 
-    public Committee(String name) {
+    public Committee(String name, Lecturer chairMan) throws ActionException {
         setName(name);
+        setChairMan(chairMan);
         committeeFriends = new Lecturer[1];
     }
 
@@ -43,8 +44,8 @@ public class Committee {
     }
 
     public void setChairMan(Lecturer chairMan) throws  ActionException {
-        if (chairMan.getTitle() != Lecturer.eTitle.Doctor)
-           throw new ActionException("the chair man is not a doctor");
+        if (chairMan.getTitle() != Lecturer.eTitle.Doctor && chairMan.getTitle() != Lecturer.eTitle.Professor)
+           throw new ActionException("the chair man is not a doctor or professor");
         if (findFriendIndexByName(chairMan.getName()) != -1) {
             throw new ActionException("the chair man is already a friend in the committee");
         }
