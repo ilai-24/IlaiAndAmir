@@ -221,23 +221,7 @@ public class College {
             throw new ActionException("there are no lecturers in the department");
         return sumSalary(departments[depNum].getLecturers(), departments[depNum].getNumOfLecturers());
     }
-    public boolean compareArticles(String a, String b) throws ActionException {
-        int aIndex = findLecturerIndexByName(a);
-        int bIndex = findLecturerIndexByName(b);
-        if (aIndex==-1)
-            throw new ActionException("the first lecturer doesn't exist");
-        else if (bIndex==-1)
-            throw new ActionException("the second lecturer doesn't exist");
-        return  lecturers[aIndex].getNumOfArticles()==lecturers[bIndex].getNumOfArticles();
 
-    }
-    public void addArticlesByName(String name,String art) throws ActionException
-    {
-        int index= findLecturerIndexByName(name);
-        if (index==-1)
-            throw new ActionException("the lecturer dosent exist");
-        lecturers[index].addArticles(art);
-    }
     public boolean compareNumOfLec(String c1, String c2) throws ActionException
     {
         int c1Index=findCommitteeIndexByName(c1);

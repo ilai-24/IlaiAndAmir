@@ -180,15 +180,7 @@ public class Main {
                     String lec = input.next();
                     System.out.println("Enter the name of the article");
                     String art = input.next();
-                    try {
-                        college.addArticlesByName(lec, art);
-                        System.out.println("article was added successfully");
-                    }
-                    catch (ActionException e) {
-                        System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
-                    }
+
                     break;
 
                 case 13://comparing articles
@@ -197,18 +189,7 @@ public class Main {
 
                     System.out.println("Enter the name of the second lecturer");
                     String lec2 = input.next();
-                    try {
-                        if (college.compareArticles(lec1,lec2)) {
-                            System.out.println("they have equal amount");
-                            break;
-                        }
-                        System.out.println("they dont have equal amount");
-                    }
-                    catch (ActionException e) {
-                        System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
-                    }
+
                     break;
 
                 case 14://comparing comeittees num of lec
@@ -217,18 +198,7 @@ public class Main {
 
                     System.out.println("Enter the name of the second committee");
                     String com2 = input.next();
-                    try {
-                        if (college.compareArticles(com1,com2)) {
-                            System.out.println("they have equal amount");
-                            break;
-                        }
-                        System.out.println("they dont have equal amount");
-                    }
-                    catch (ActionException e) {
-                        System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
-                    }
+
                     break;
 
                 case 15://copying a committee

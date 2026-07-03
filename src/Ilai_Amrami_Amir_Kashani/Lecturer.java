@@ -13,9 +13,7 @@ public class Lecturer {
     private double salary;
     private Committee[]committees;
     private int numOfLecturerCommittees;
-    private String[]articles;
-    private int numOfArticles;
-    private String professionInstitute;
+
 
     public Lecturer(String name,int id,eTitle title,String degreeName,double salary)throws ActionException {
         setName(name);
@@ -23,8 +21,6 @@ public class Lecturer {
         setTitle(title);
         setDegreeName(degreeName);
         setSalary(salary);
-        articles=new String[1];
-        numOfArticles=0;
         committees=new Committee[1];
         numOfLecturerCommittees=0;
     }
@@ -56,38 +52,12 @@ public class Lecturer {
 
     }
 
-    public void setProfessionInstitute(String professionInstitute) {
-        this.professionInstitute = professionInstitute;
-    }
-
     public void setDepartment(Department department){
        this.department=department;
    }
 
-    public void setArticles(String[] articles) throws  ActionException {
-        if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
-            this.articles = articles;
-        }
-        else
-            throw new ActionException("lecturer needs to be a master or doctor");
 
-    }
-    public void addArticles(String article)throws ActionException {
-        if (this.title!=eTitle.Doctor&&this.title!=eTitle.Professor)
-            throw new ActionException(this.name+" is not a professor or a doctor");
-        String[] temp = new String[articles.length * 2];
-        for (int i = 0; i < numOfArticles; i++)
-            temp[i] = articles[i];
-        temp[numOfArticles] = article;
-        numOfArticles++;
-        articles = temp;
-    }
 
-    public int getNumOfArticles()throws ActionException {
-        if (this.title!=eTitle.Doctor&&this.title!=eTitle.Professor)
-            throw new ActionException(this.name+" is not a professor or a doctor");
-        return numOfArticles;
-    }
 
     public String getName() {
         return name;
@@ -111,10 +81,6 @@ public class Lecturer {
 
     public int getNumOfLecturerCommittees() {
         return numOfLecturerCommittees;
-    }
-
-    public String getProfessionInstitute() {
-        return professionInstitute;
     }
 
     public Committee[] getCommittees() {
@@ -152,21 +118,14 @@ public class Lecturer {
         StringBuffer str=new StringBuffer("name: "+name+", id: "+id+", title: "+title+", degree name: "+degreeName+", salary: "+salary+",department: "+department_str+",committees: ");
         for (int i=0;i<numOfLecturerCommittees;i++)
             str.append(committees[i].getName()+", ");
-        if (this.title== eTitle.Master||this.title==eTitle.Doctor) {
-            str.append(",articles:");
-            for (int i = 0; i < numOfArticles; i++)
-                str.append(articles[i] + ", ");
-        }
-
-
         return str.toString();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Lecturer lecturer = (Lecturer) o;
-        return id == lecturer.id && Double.compare(salary, lecturer.salary) == 0 && numOfLecturerCommittees == lecturer.numOfLecturerCommittees && numOfArticles == lecturer.numOfArticles && title == lecturer.title && Objects.equals(name, lecturer.name) && Objects.equals(degreeName, lecturer.degreeName) && Objects.equals(department, lecturer.department) && Objects.deepEquals(committees, lecturer.committees) && Objects.deepEquals(articles, lecturer.articles) && Objects.equals(professionInstitute, lecturer.professionInstitute);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Lecturer lecturer = (Lecturer) o;
+//        return id == lecturer.id && Double.compare(salary, lecturer.salary) == 0 && numOfLecturerCommittees == lecturer.numOfLecturerCommittees && numOfArticles == lecturer.numOfArticles && title == lecturer.title && Objects.equals(name, lecturer.name) && Objects.equals(degreeName, lecturer.degreeName) && Objects.equals(department, lecturer.department) && Objects.deepEquals(committees, lecturer.committees) && Objects.deepEquals(articles, lecturer.articles) && Objects.equals(professionInstitute, lecturer.professionInstitute);
+//    }
 
 }
