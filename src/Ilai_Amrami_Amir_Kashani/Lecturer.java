@@ -1,8 +1,4 @@
 package Ilai_Amrami_Amir_Kashani;
-
-import java.util.Arrays;
-import java.util.Objects;
-
 public abstract class Lecturer {
     protected String name;
     protected int id;

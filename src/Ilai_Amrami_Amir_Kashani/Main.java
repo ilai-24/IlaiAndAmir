@@ -204,12 +204,18 @@ public class Main {
 
                     break;
 
-                case 14://comparing comeittees num of lec
+                case 14://comparing committees num of lec
                     System.out.println("Enter the name of the first committee");
                     String com1 = input.next();
 
                     System.out.println("Enter the name of the second committee");
                     String com2 = input.next();
+                    try {
+                        System.out.println(college.compareNumOfLec(com2,com1));
+                    }
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    }
 
                     break;
 
