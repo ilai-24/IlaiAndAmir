@@ -62,9 +62,9 @@ public class Department {
         return -1;
     }
 
-    public College.eAddLecturerToDepartment addLecturer(Lecturer lecturer) {
+    public void addLecturer(Lecturer lecturer) throws ActionException {
         if (findLecturerIndexByName(lecturer.getName()) != -1) {
-            return College.eAddLecturerToDepartment.FailAlreadyExisted;
+            throw new ActionException("Lecturer already exists in this department.");
         }
         if (lecturer.getDepartment() != null)
             lecturer.getDepartment().removeLecturer(lecturer);
@@ -76,8 +76,6 @@ public class Department {
         temp[numOfLecturers] = lecturer;
         numOfLecturers++;
         lecturers = temp;
-
-        return College.eAddLecturerToDepartment.Succeed;
     }
 
     public void removeLecturer(Lecturer lecturer) {
@@ -92,7 +90,7 @@ public class Department {
             lecturers[index] = temp;
         }
     }
-
+    @Override
     public String toString() {
         StringBuffer str = new StringBuffer("Ilai_Amrami_Amir_Kashani.Department: " + name + "\n");
         for (int i = 0; i < numOfLecturers; i++) {

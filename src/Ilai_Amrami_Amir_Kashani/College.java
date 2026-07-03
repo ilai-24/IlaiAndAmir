@@ -3,21 +3,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class College {
-
-    public enum eAddLecturerToDepartment {Succeed, NoLecturerExisted, FailAlreadyExisted, FailNoDepartmentExisted}
-
-    public enum eRemoveLecturerToDepartment {Succeed, FailNoLecturerExisted}
-
-    public enum eAddCommittee {Succeed, FailedMatchName, FailedChairManNotExisted, FailedChairmanNotDoctor}
-
-    public enum eAddFriendToCommittee {Succeed, FailNoCommitteeExisted, FailNoFriendExisted, FailFriendIsChairMan, FailFriendIsInCommittee, FailFriendIsNotDr}
-
-    public enum eAddChairman {Succeed, FailNoCommitteeExisted, FailNoChairmanExisted, FailChairmanIsFriend, FailChairManIsNotDr}
-
-    public enum eRemoveFriend {Succeed, FailNoCommitteeExisted, FailNoFriendExisted, FailFriendNotInCommittee}
-
-    public enum eAddDepartment {Succeed, FailedMatchedName, FailedNegativeNumOfStudents}
-
     private String name;
     private Lecturer[] lecturers;
     private int lecturerNum;
@@ -112,12 +97,12 @@ public class College {
     public void addLecturerToDepartment(String department, String lecturer) throws ActionException{
         int depIndex = findDepartmentIndexByName(department);
         if (depIndex == -1) {
-            throw new ActionException("department dosent exist");
+            throw new ActionException("department doesnt exist");
         }
 
         int lecIndex = findLecturerIndexByName(lecturer);
         if (lecIndex == -1) {
-            throw new ActionException("lecturer dosent exist");
+            throw new ActionException("lecturer doesnt exist");
         }
 
         departments[depIndex].addLecturer(lecturers[lecIndex]);
@@ -224,7 +209,7 @@ public class College {
 
     public double AvgSalary() throws ActionException{
         if (lecturerNum ==0)
-            throw new ActionException("there are no lecturers in the requested field");
+            throw new ActionException("there are no lecturers the college");
         return sumSalary(lecturers, lecturerNum);
     }
 
@@ -232,6 +217,8 @@ public class College {
         int depNum = findDepartmentIndexByName(department);
         if (depNum == -1)
             throw new ActionException("the department doesn't exists");
+        if (departments[depNum].getNumOfLecturers() ==0)
+            throw new ActionException("there are no lecturers in the department");
         return sumSalary(departments[depNum].getLecturers(), departments[depNum].getNumOfLecturers());
     }
     public boolean compareArticles(String a, String b) throws ActionException {
