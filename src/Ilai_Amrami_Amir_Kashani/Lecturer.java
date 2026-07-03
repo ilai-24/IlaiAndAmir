@@ -3,22 +3,19 @@ package Ilai_Amrami_Amir_Kashani;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Lecturer {
-    public enum eTitle{Bachelor, Master, Doctor,Professor}
-    private eTitle title;
-    private String name;
-    private int id;
-    private String degreeName;
-    private Department department;
-    private double salary;
-    private Committee[]committees;
-    private int numOfLecturerCommittees;
+public abstract class Lecturer {
+    protected String name;
+    protected int id;
+    protected String degreeName;
+    protected Department department;
+    protected double salary;
+    protected Committee[]committees;
+    protected int numOfLecturerCommittees;
 
 
-    public Lecturer(String name,int id,eTitle title,String degreeName,double salary)throws ActionException {
+    public Lecturer(String name,int id,String degreeName,double salary)throws ActionException {
         setName(name);
         setId(id);
-        setTitle(title);
         setDegreeName(degreeName);
         setSalary(salary);
         committees=new Committee[1];
@@ -43,10 +40,6 @@ public class Lecturer {
             throw new ActionException("The ID cant be negative.Try again");
         this.id=id;
     }
-    public void setTitle(eTitle title){
-
-        this.title=title;
-    }
     public void setDegreeName(String degreeName) {
         this.degreeName = degreeName;
 
@@ -65,10 +58,6 @@ public class Lecturer {
 
     public int getId() {
         return id;
-    }
-
-    public eTitle getTitle() {
-        return title;
     }
 
     public String getDegreeName() {
@@ -111,15 +100,7 @@ public class Lecturer {
         return -1;
     }
 
-    public String toString() {
-        String department_str ="none";
-        if(department !=null)
-            department_str=department.getName();
-        StringBuffer str=new StringBuffer("name: "+name+", id: "+id+", title: "+title+", degree name: "+degreeName+", salary: "+salary+",department: "+department_str+",committees: ");
-        for (int i=0;i<numOfLecturerCommittees;i++)
-            str.append(committees[i].getName()+", ");
-        return str.toString();
-    }
+    public abstract String toString();
 
 //    @Override
 //    public boolean equals(Object o) {

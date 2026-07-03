@@ -1,6 +1,5 @@
 package Ilai_Amrami_Amir_Kashani;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -31,19 +30,31 @@ public class Main {
                     exit = false;
                     break;
                 case 1: //add a lecturer;
+                    String article="", grantedProfessor = "";
                     System.out.println("Enter the name of the  lecturer");
                     name = input.next();
                     System.out.println("Enter the id of the lecturer ");
                     id = input.nextInt();
                     System.out.println("Enter the title of the lecturer (Bachelor,Master,Doctor,Professor) ");
                     sTitle = input.next();
+
+                    if (sTitle.equals("Doctor") ||sTitle.equals("Professor")){
+                        System.out.println("Enter the name of the doctor's or professor's article");
+                        article = input.next();
+                    }
+                    if (sTitle.equals("Professor")){
+                        System.out.println("Enter the name of the of the body that granted the professor's title");
+                        grantedProfessor = input.next();
+                    }
+
+
                     System.out.println("Enter the degree name of the lecturer ");
                     degreeName = input.next();
                     System.out.println("Enter the salary of the lecturer");
                     salary = input.nextDouble();
 
                     try {
-                        college.addLecturer(name, id, sTitle, degreeName, salary);
+                        college.addLecturer(name, id, degreeName, salary, article, grantedProfessor,sTitle);
                         System.out.println("Lecturer added successfully");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());

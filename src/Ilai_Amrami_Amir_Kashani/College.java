@@ -1,8 +1,11 @@
 package Ilai_Amrami_Amir_Kashani;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class College {
+
+    public enum ETitle{Bachelor,Doctor,Master,Professor};
+
+
     private String name;
     private Lecturer[] lecturers;
     private int lecturerNum;
@@ -53,21 +56,37 @@ public class College {
         return departmentNum;
     }
 
-    public void  addLecturer(String name, int id, String title, String degreeName, double salary)throws ActionException {
+    public void  addLecturer(String name, int id, String degreeName, double salary, String article, String grantedProfessor,String sTitle)throws ActionException {
         for (int i = 0; i < lecturerNum; i++) {
             if (name.equals(lecturers[i].getName()))
                 throw new ActionException("the lecturer name is already exist. Try again");
             if (id == lecturers[i].getId())
                 throw new ActionException("the lecturer id is already exist. Try again");
         }
-        Lecturer.eTitle eTitle;
+            ETitle eTitle;
         try {
-                eTitle = Lecturer.eTitle.valueOf(title);
+                eTitle =ETitle.valueOf(sTitle);
         }
         catch (IllegalArgumentException e) {
             throw  new ActionException("the lecturer Title is wrong. Try again");
         }
-        Lecturer lecturer = new Lecturer(name, id, eTitle, degreeName, salary);
+        Lecturer lecturer = null;
+
+        if (eTitle == ETitle.Bachelor){
+            lecturer=(Bachelor)new Bachelor(name,id,degreeName,salary);
+        }
+        if (eTitle == ETitle.Master){
+            lecturer =(Master)new Master(name,id,degreeName,salary);
+        }
+
+        if (eTitle == ETitle.Doctor){
+             lecturer=(Doctor)new Doctor(name,id,degreeName,salary,article);
+        }
+
+        if (eTitle == ETitle.Professor){
+             lecturer=(Professor)new Professor(name,id,degreeName,salary,article,grantedProfessor);
+        }
+
 
         Lecturer[] temp = new Lecturer[lecturers.length * 2];
         for (int j = 0; j < lecturerNum; j++)

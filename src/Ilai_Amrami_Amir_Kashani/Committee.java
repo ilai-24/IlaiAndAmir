@@ -44,8 +44,10 @@ public class Committee {
     }
 
     public void setChairMan(Lecturer chairMan) throws  ActionException {
-        if (chairMan.getTitle() != Lecturer.eTitle.Doctor && chairMan.getTitle() != Lecturer.eTitle.Professor)
-           throw new ActionException("the chair man is not a doctor or professor");
+        if (chairMan instanceof Bachelor || chairMan instanceof Master) {
+            throw new ActionException("the chair man is not a doctor or professor");}
+
+
         if (findFriendIndexByName(chairMan.getName()) != -1) {
             throw new ActionException("the chair man is already a friend in the committee");
         }
