@@ -3,7 +3,7 @@ package Ilai_Amrami_Amir_Kashani;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Committee {
+public class Committee{
     private String name;
     private Lecturer[] committeeFriends;
     private Lecturer chairMan;
@@ -44,7 +44,7 @@ public class Committee {
     }
 
     public void setChairMan(Lecturer chairMan) throws  ActionException {
-        if (chairMan instanceof Bachelor || chairMan instanceof Master) {
+        if (!(chairMan instanceof Doctor)) {
             throw new ActionException("the chair man is not a doctor or professor");}
 
 

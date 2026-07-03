@@ -186,7 +186,13 @@ public class Main {
                     String lec = input.next();
                     System.out.println("Enter the name of the article");
                     String art = input.next();
-
+                    try {
+                        college.addArticle(lec,art);
+                        System.out.println("The article was added successfully");
+                    }
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 13://comparing articles

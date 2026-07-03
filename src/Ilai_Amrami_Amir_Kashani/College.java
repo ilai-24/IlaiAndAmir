@@ -179,6 +179,18 @@ public class College {
         committees[committeeIndex].removeFriend(lecturers[friendIndex]);
     }
 
+    public void addArticle(String lecturer,String article) throws ActionException {
+        int lectureIndex = findLecturerIndexByName(lecturer);
+        if (lectureIndex == -1)
+            throw new ActionException("the lecturer doesn't exists");
+
+        if (!(lecturers[lectureIndex] instanceof Doctor))
+            throw new ActionException("the lecturer is not Doctor/Proffesor");
+
+        ((Doctor) lecturers[lectureIndex]).addArticles(article);
+
+    }
+
     public int findLecturerIndexByName(String name) {
         for (int i = 0; i < lecturerNum; i++) {
             if (lecturers[i].getName().equals(name))
