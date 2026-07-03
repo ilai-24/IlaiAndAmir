@@ -165,7 +165,6 @@ public class College {
         if (chairmanIndex == -1)
             throw new ActionException("the chair man doesn't exists");
 
-
          committees[committeeIndex].setChairMan(lecturers[chairmanIndex]);
     }
 
@@ -177,7 +176,8 @@ public class College {
         int committeeIndex = findCommitteeIndexByName(committeeName);
         if (committeeIndex == -1)
             throw new ActionException("the committee doesn't exists");
-         committees[committeeIndex].removeFriend(lecturers[friendIndex]);
+
+        committees[committeeIndex].removeFriend(lecturers[friendIndex]);
     }
 
     public int findLecturerIndexByName(String name) {

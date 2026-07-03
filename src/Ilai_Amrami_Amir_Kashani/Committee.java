@@ -74,6 +74,7 @@ public class Committee {
         int friendIndex = findFriendIndexByName(friend.getName());
         if (friendIndex == -1)
             throw new ActionException("the lecturer isn't a friend in the committee");
+
         friend.removeCommittee(this);
         numOfFriends--;
 
