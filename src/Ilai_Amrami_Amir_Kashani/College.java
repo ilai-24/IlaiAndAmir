@@ -56,7 +56,7 @@ public class College {
         return departmentNum;
     }
 
-    public void  addLecturer(String name, int id, String degreeName, double salary, String article, String grantedProfessor,String sTitle)throws ActionException {
+    public void  addLecturer(String name, int id, String degreeName, double salary, String grantedProfessor,String sTitle)throws ActionException {
         for (int i = 0; i < lecturerNum; i++) {
             if (name.equals(lecturers[i].getName()))
                 throw new ActionException("the lecturer name is already exist. Try again");
@@ -73,18 +73,18 @@ public class College {
         Lecturer lecturer = null;
 
         if (eTitle == ETitle.Bachelor){
-            lecturer=(Bachelor)new Bachelor(name,id,degreeName,salary);
+            lecturer=new Bachelor(name,id,degreeName,salary);
         }
         if (eTitle == ETitle.Master){
-            lecturer =(Master)new Master(name,id,degreeName,salary);
+            lecturer =new Master(name,id,degreeName,salary);
         }
 
         if (eTitle == ETitle.Doctor){
-             lecturer=(Doctor)new Doctor(name,id,degreeName,salary,article);
+             lecturer=new Doctor(name,id,degreeName,salary);
         }
 
         if (eTitle == ETitle.Professor){
-             lecturer=(Professor)new Professor(name,id,degreeName,salary,article,grantedProfessor);
+             lecturer=new Professor(name,id,degreeName,salary,grantedProfessor);
         }
 
 

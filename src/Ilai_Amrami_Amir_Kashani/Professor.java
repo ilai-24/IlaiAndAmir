@@ -1,14 +1,11 @@
 package Ilai_Amrami_Amir_Kashani;
 
-public class Professor extends Lecturer {
-    private String[] articles;
+public class Professor extends Doctor {
     private String grantedProfessor;
 
 
-    public Professor(String name, int id, String degreeName, double salary, String article, String grantedProfessor) throws ActionException {
+    public Professor(String name, int id, String degreeName, double salary, String article) throws ActionException {
         super(name, id, degreeName, salary);
-        this.articles=new String[2];
-        this.articles[0]=article;
         this.grantedProfessor=grantedProfessor;
     }
     public String toString() {
