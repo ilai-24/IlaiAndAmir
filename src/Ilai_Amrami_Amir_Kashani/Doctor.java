@@ -1,6 +1,6 @@
 package Ilai_Amrami_Amir_Kashani;
 
-public class Doctor extends Lecturer {
+public class Doctor extends Lecturer implements Comparable<Doctor> {
     protected String[] articles;
     protected int articlesNum;
 
@@ -26,6 +26,13 @@ public class Doctor extends Lecturer {
         return articlesNum;
     }
 
+    public boolean isMoreArticles(Doctor doctor) {
+        if(doctor.getArticlesNum()>articlesNum){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         String department_str ="none";
@@ -35,5 +42,15 @@ public class Doctor extends Lecturer {
         for (int i=0;i<numOfLecturerCommittees;i++)
             str.append(committees[i].getName()+", ");
         return str.toString();
+    }
+    @Override
+    public int compareTo(Doctor doctor) {
+        if (doctor.getArticlesNum()>articlesNum) {
+            return -1;
+        }
+        if (doctor.getArticlesNum()<articlesNum) {
+            return 1;
+        }
+        return 0;
     }
 }

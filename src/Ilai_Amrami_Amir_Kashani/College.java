@@ -251,6 +251,24 @@ public class College {
             throw new ActionException("there are no lecturers in the department");
         return sumSalary(departments[depNum].getLecturers(), departments[depNum].getNumOfLecturers());
     }
+    public int compareDoctorsAndProfessors(String doctor1Name,String doctor2Name) throws ActionException {
+        int doc1Index = findLecturerIndexByName(doctor1Name);
+        if (doc1Index == -1)
+            throw new ActionException(doctor1Name+ " doesn't exists");
+        int doc2Index = findLecturerIndexByName(doctor2Name);
+        if(doc2Index == -1)
+            throw new ActionException(doctor2Name+ " doesn't exists");
+        if (!(lecturers[doc1Index] instanceof Doctor))
+            throw new ActionException( doctor1Name+" is not Doctor/Proffesor");
+        if (!(lecturers[doc2Index] instanceof Doctor))
+            throw new ActionException(doctor2Name+" is not Doctor/Proffesor");
+        if (lecturers[doc1Index].equals(lecturers[doc2Index]))
+            throw new ActionException("the doctors are the same person");
+
+        return  ((Doctor) lecturers[doc1Index]).compareTo((Doctor) lecturers[doc2Index]);
+
+
+    }
 
     public boolean compareNumOfLec(String c1, String c2) throws ActionException
     {

@@ -201,7 +201,19 @@ public class Main {
 
                     System.out.println("Enter the name of the second lecturer");
                     String lec2 = input.next();
+                    try {
+                        int comparedNum=college.compareDoctorsAndProfessors(lec1,lec2);
+                        if (comparedNum==0)
+                            System.out.println( lec1+" and "+lec2+" have the same articles");
+                        else if (comparedNum ==1)
+                            System.out.println( lec1+" has more articles then "+lec2);
+                        else
+                            System.out.println(lec2+" has more articles then "+lec1);
 
+                    }
+                    catch (ActionException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 14://comparing committees num of lec
