@@ -294,11 +294,17 @@ public class College {
         int index=findCommitteeIndexByName(com);
         if(index==-1)
             throw new ActionException("the committee doesn't exist");
-        addCommittee("new "+committees[index].getName(),committees[index].getChairMan().getName());
-        if (committees[index].getNumOfFriends()!=0) {
-            committees[committeeNum].setNumOfFriends(committees[index].getNumOfFriends());
-            committees[committeeNum].setCommitteeFriends(committees[index].getCommitteeFriends());
-        }
+
+        Committee committee=new Committee(committees[index]);
+
+        Committee[] temp = new Committee[committees.length * 2];
+        for (int j = 0; j < committeeNum; j++)
+            temp[j] = committees[j];
+        temp[committeeNum] = committee;
+        committeeNum++;
+        committees = temp;
+
+
     }
 
 

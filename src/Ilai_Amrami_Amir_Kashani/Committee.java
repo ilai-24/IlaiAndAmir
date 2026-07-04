@@ -12,6 +12,18 @@ public class Committee{
         setName(name);
         setChairMan(chairMan);
         committeeFriends = new Lecturer[1];
+        numOfFriends=0;
+    }
+    public Committee(Committee committee) throws ActionException {
+        setName(committee.getName()+"New");
+        setChairMan(committee.getChairMan());
+        this.committeeFriends=new Lecturer[committee.getCommitteeFriends().length];
+        this.numOfFriends=committee.getNumOfFriends();
+
+        for (int i = 0; i <numOfFriends; i++) {
+            this.committeeFriends[i]=committee.getCommitteeFriends()[i];
+        }
+
     }
 
     public void setName(String name) {
