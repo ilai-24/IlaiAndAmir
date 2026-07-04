@@ -131,7 +131,7 @@ public class Main {
                     while (college.findDepartmentIndexByName(departmentName)!=-1)
                     {
                         System.out.println("The name is taken try again");
-                        name = input.next();
+                        departmentName = input.next();
                     }
                     System.out.println("Enter the amount of students");
                     int studentsNum = input.nextInt();
