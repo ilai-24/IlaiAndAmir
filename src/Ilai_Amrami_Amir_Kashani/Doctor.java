@@ -41,6 +41,10 @@ public class Doctor extends Lecturer implements Comparable<Doctor> {
         StringBuffer str=new StringBuffer("name: "+name+", id: "+id+", title:Doctor "+", degree name: "+degreeName+", salary: "+salary+",department: "+department_str+",committees: ");
         for (int i=0;i<numOfLecturerCommittees;i++)
             str.append(committees[i].getName()+", ");
+        str.append(", articles: ");
+        for (int j=0;j<articlesNum;j++)
+            str.append(articles[j]+", ");
+
         return str.toString();
     }
     @Override

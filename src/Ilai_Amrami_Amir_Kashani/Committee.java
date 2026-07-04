@@ -103,7 +103,7 @@ public class Committee{
                 return i;
         return -1;
     }
-
+    @Override
     public String toString() {
         StringBuffer str = new StringBuffer("committee: " + name + "\n");
         for (int i = 0; i < numOfFriends; i++)

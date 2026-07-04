@@ -104,6 +104,6 @@ public abstract class Lecturer {
         Lecturer lecturer=(Lecturer)obj;
         return name.equals(lecturer.getName()) && id==lecturer.getId();
     }
-
+    @Override
     public abstract String toString();
 }

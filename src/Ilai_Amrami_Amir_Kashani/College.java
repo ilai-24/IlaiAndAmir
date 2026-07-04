@@ -307,7 +307,6 @@ public class College {
 
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof College))
