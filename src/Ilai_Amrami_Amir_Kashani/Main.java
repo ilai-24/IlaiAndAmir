@@ -195,7 +195,7 @@ public class Main {
                     }
                     break;
 
-                case 13://comparing articles
+                case 13://comparing Doctors and Professors by articles
                     System.out.println("Enter the name of the first lecturer");
                     String lec1 = input.next();
 

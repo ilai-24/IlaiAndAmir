@@ -96,13 +96,14 @@ public abstract class Lecturer {
         return -1;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Lecturer)){
+            return false;
+        }
+        Lecturer lecturer=(Lecturer)obj;
+        return name.equals(lecturer.getName()) && id==lecturer.getId();
+    }
+
     public abstract String toString();
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Lecturer lecturer = (Lecturer) o;
-//        return id == lecturer.id && Double.compare(salary, lecturer.salary) == 0 && numOfLecturerCommittees == lecturer.numOfLecturerCommittees && numOfArticles == lecturer.numOfArticles && title == lecturer.title && Objects.equals(name, lecturer.name) && Objects.equals(degreeName, lecturer.degreeName) && Objects.equals(department, lecturer.department) && Objects.deepEquals(committees, lecturer.committees) && Objects.deepEquals(articles, lecturer.articles) && Objects.equals(professionInstitute, lecturer.professionInstitute);
-//    }
-
 }

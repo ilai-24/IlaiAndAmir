@@ -101,9 +101,10 @@ public class Department {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Department that = (Department) o;
-        return numOfStudents == that.numOfStudents && numOfLecturers == that.numOfLecturers && Objects.equals(name, that.name) && Objects.deepEquals(lecturers, that.lecturers);
+        if (!(o instanceof Department))
+            return false;
+        Department department = (Department) o;
+        return department.getName().equals(name);
     }
 
 }

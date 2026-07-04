@@ -102,9 +102,10 @@ public class Committee{
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Committee committee = (Committee) o;
-        return numOfFriends == committee.numOfFriends && Objects.equals(name, committee.name) && Objects.deepEquals(committeeFriends, committee.committeeFriends) && Objects.equals(chairMan, committee.chairMan);
+        if(!(o instanceof Committee))
+            return false;
+        Committee committee = (Committee)o;
+        return this.name.equals(committee.getName());
     }
 
 }

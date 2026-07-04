@@ -22,6 +22,10 @@ public class Doctor extends Lecturer {
         articlesNum++;
     }
 
+    public int getArticlesNum() {
+        return articlesNum;
+    }
+
     @Override
     public String toString() {
         String department_str ="none";

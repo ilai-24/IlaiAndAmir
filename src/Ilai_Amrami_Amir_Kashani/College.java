@@ -5,7 +5,6 @@ public class College {
 
     public enum ETitle{Bachelor,Doctor,Master,Professor};
 
-
     private String name;
     private Lecturer[] lecturers;
     private int lecturerNum;
@@ -278,9 +277,10 @@ public class College {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof College))
+            return false;
         College college = (College) o;
-        return lecturerNum == college.lecturerNum && committeeNum == college.committeeNum && departmentNum == college.departmentNum && Objects.equals(name, college.name) && Objects.deepEquals(lecturers, college.lecturers) && Objects.deepEquals(committees, college.committees) && Objects.deepEquals(departments, college.departments);
+        return college.getName().equals(name);
     }
 
 }
