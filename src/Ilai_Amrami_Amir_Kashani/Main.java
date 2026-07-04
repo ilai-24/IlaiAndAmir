@@ -32,7 +32,12 @@ public class Main {
                 case 1: //add a lecturer;
                     String grantedProfessor = "";
                     System.out.println("Enter the name of the  lecturer");
-                    name = college.getUniqueName(input,"Lecturer");
+                    name = input.next();
+                    while (college.findLecturerIndexByName(name)!=-1)
+                    {
+                        System.out.println("The name is taken try again");
+                        name = input.next();
+                    }
                     System.out.println("Enter the id of the lecturer ");
                     id = input.nextInt();
                     System.out.println("Enter the title of the lecturer (Bachelor,Master,Doctor,Professor) ");
@@ -122,7 +127,12 @@ public class Main {
 
                 case 6: //add a new department
                     System.out.println("Enter the name of the department");
-                    String departmentName = college.getUniqueName(input,"Department");
+                    String departmentName = input.next();
+                    while (college.findDepartmentIndexByName(departmentName)!=-1)
+                    {
+                        System.out.println("The name is taken try again");
+                        name = input.next();
+                    }
                     System.out.println("Enter the amount of students");
                     int studentsNum = input.nextInt();
                     try {

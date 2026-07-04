@@ -55,33 +55,7 @@ public class College {
     public int getDepartmentNum() {
         return departmentNum;
     }
-    public String getUniqueName(Scanner scanner, String type) {
-        String name;
-        while (true) {
-            name = scanner.nextLine();
-            if (name.isEmpty()) {
-                continue;
-            }
 
-            boolean isTaken = false;
-
-            switch (type) {
-                case "Department":
-                    isTaken = findDepartmentIndexByName(name)!=-1;
-                    break;
-                case "Lecturer":
-                    isTaken = findLecturerIndexByName(name)!=-1;
-                    break;
-            }
-
-            if (isTaken) {
-                System.out.println("The name is taken try again");
-            } else {
-                break;
-            }
-        }
-        return name;
-    }
 
     public void  addLecturer(String name, int id, String degreeName, double salary, String grantedProfessor,String sTitle)throws ActionException {
         for (int i = 0; i < lecturerNum; i++) {
