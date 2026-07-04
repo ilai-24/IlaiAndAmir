@@ -99,6 +99,13 @@ public class Committee{
         str.append("\n ChairmanName" + chairMan);
         return str.toString();
     }
+    public int getNumArticles(){
+        int articles = 0;
+        for (int i = 0; i < numOfFriends; i++)
+            if (committeeFriends[i] instanceof Doctor)
+                articles+=((Doctor) committeeFriends[i]).getArticlesNum();
+        return articles;
+    }
 
     @Override
     public boolean equals(Object o) {

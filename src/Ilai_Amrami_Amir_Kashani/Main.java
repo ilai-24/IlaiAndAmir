@@ -216,14 +216,32 @@ public class Main {
                     }
                     break;
 
-                case 14://comparing committees num of lec
+                case 14://comparing committees num of lec or articles
                     System.out.println("Enter the name of the first committee");
                     String com1 = input.next();
 
                     System.out.println("Enter the name of the second committee");
                     String com2 = input.next();
+                    int compare=-1;
+                    while (compare!=1 && compare!=0) {
+                        System.out.println("press 0 for comparing by number of lecturers/ press 1 for comparing by number of articles");
+                        compare = input.nextInt();
+                    }
+
                     try {
-                        System.out.println(college.compareNumOfLec(com2,com1));
+                        int result;
+                        if (compare==0)
+                            result=college.compareCommittees(com1,com2,new CompareCommitteesByFriends());
+                        else
+                            result=college.compareCommittees(com1,com2,new CompareCommitteesByArticles());
+
+                        if (result==0)
+                            System.out.println( com1+" and "+com2+" have the same amount");
+                        else if (result ==1)
+                            System.out.println( com1+" has more  then "+com2);
+                        else
+                            System.out.println(com2+" has more articles then "+com1);
+
                     }
                     catch (ActionException e) {
                         System.out.println(e.getMessage());

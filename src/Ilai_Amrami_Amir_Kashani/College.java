@@ -1,4 +1,5 @@
 package Ilai_Amrami_Amir_Kashani;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class College {
@@ -270,15 +271,23 @@ public class College {
 
     }
 
-    public boolean compareNumOfLec(String c1, String c2) throws ActionException
+    public int compareCommittees(String committeeName1, String committeeName2, Comparator c) throws ActionException
     {
-        int c1Index=findCommitteeIndexByName(c1);
-        int c2Index=findCommitteeIndexByName(c2);
+        int c1Index=findCommitteeIndexByName(committeeName1);
         if(c1Index==-1)
             throw new ActionException("the first committee doesn't exist");
+
+        int c2Index=findCommitteeIndexByName(committeeName2);
         if(c2Index==-1)
             throw new ActionException("the second committee doesn't exist");
-        return committees[c1Index].getNumOfFriends()==committees[c2Index].getNumOfFriends();
+
+        if (committees[c1Index].equals(committees[c2Index]))
+            throw new ActionException("the committees are the same committees");
+
+        return c.compare(committees[c1Index],committees[c2Index]);
+
+
+
     }
     public void copyCommittee(String com) throws ActionException
     {
