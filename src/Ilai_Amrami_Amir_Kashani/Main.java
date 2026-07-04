@@ -32,7 +32,7 @@ public class Main {
                 case 1: //add a lecturer;
                     String grantedProfessor = "";
                     System.out.println("Enter the name of the  lecturer");
-                    name = input.next();
+                    name = college.getUniqueName(input,"Lecturer");
                     System.out.println("Enter the id of the lecturer ");
                     id = input.nextInt();
                     System.out.println("Enter the title of the lecturer (Bachelor,Master,Doctor,Professor) ");
@@ -122,7 +122,7 @@ public class Main {
 
                 case 6: //add a new department
                     System.out.println("Enter the name of the department");
-                    String departmentName = input.next();
+                    String departmentName = college.getUniqueName(input,"Department");
                     System.out.println("Enter the amount of students");
                     int studentsNum = input.nextInt();
                     try {

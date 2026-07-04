@@ -1,11 +1,11 @@
 package Ilai_Amrami_Amir_Kashani;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class College {
 
     public enum ETitle{Bachelor,Doctor,Master,Professor};
-
     private String name;
     private Lecturer[] lecturers;
     private int lecturerNum;
@@ -55,11 +55,36 @@ public class College {
     public int getDepartmentNum() {
         return departmentNum;
     }
+    public String getUniqueName(Scanner scanner, String type) {
+        String name;
+        while (true) {
+            name = scanner.nextLine();
+            if (name.isEmpty()) {
+                continue;
+            }
+
+            boolean isTaken = false;
+
+            switch (type) {
+                case "Department":
+                    isTaken = findDepartmentIndexByName(name)!=-1;
+                    break;
+                case "Lecturer":
+                    isTaken = findLecturerIndexByName(name)!=-1;
+                    break;
+            }
+
+            if (isTaken) {
+                System.out.println("The name is taken try again");
+            } else {
+                break;
+            }
+        }
+        return name;
+    }
 
     public void  addLecturer(String name, int id, String degreeName, double salary, String grantedProfessor,String sTitle)throws ActionException {
         for (int i = 0; i < lecturerNum; i++) {
-            if (name.equals(lecturers[i].getName()))
-                throw new ActionException("the lecturer name is already exist. Try again");
             if (id == lecturers[i].getId())
                 throw new ActionException("the lecturer id is already exist. Try again");
         }
