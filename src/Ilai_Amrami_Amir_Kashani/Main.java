@@ -90,8 +90,6 @@ public class Main {
                         System.out.println("The committee was added successfully");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
 
                     break;
@@ -106,8 +104,6 @@ public class Main {
                         System.out.println("The friend was successfully added");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
                     break;
                 case 4: //add new chairman
@@ -121,8 +117,6 @@ public class Main {
                         System.out.println("The chairman was added successfully");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
                     break;
 
@@ -137,8 +131,6 @@ public class Main {
                         System.out.println("The friend was successfully removed.");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
                     break;
 
@@ -157,8 +149,6 @@ public class Main {
                         System.out.println("The department was added successfully");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
                     break;
                 case 7://add a lecturer to a department
@@ -171,8 +161,6 @@ public class Main {
                         System.out.println("The lecturer was added to the department successfully");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
                     break;
 
@@ -183,8 +171,6 @@ public class Main {
                     }
                     catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
                     break;
 
@@ -197,8 +183,6 @@ public class Main {
                     }
                     catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
                     break;
                 case 10: //toString of all lecturers
@@ -286,8 +270,6 @@ public class Main {
                     }
                     catch (ActionException e) {
                         System.out.println(e.getMessage());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Wrong form of input");
                     }
                     break;
             }
