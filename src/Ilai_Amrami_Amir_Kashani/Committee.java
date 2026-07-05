@@ -2,7 +2,7 @@ package Ilai_Amrami_Amir_Kashani;
 
 import java.util.Objects;
 
-public class Committee{
+public class Committee implements Cloneable{
     private String name;
     private Lecturer[] committeeFriends;
     private Lecturer chairMan;
@@ -13,17 +13,6 @@ public class Committee{
         setChairMan(chairMan);
         committeeFriends = new Lecturer[1];
         numOfFriends=0;
-    }
-    public Committee(Committee committee) throws ActionException {
-        setName(committee.getName()+"New");
-        setChairMan(committee.getChairMan());
-        this.committeeFriends=new Lecturer[committee.getCommitteeFriends().length];
-        this.numOfFriends=committee.getNumOfFriends();
-
-        for (int i = 0; i <numOfFriends; i++) {
-            this.committeeFriends[i]=committee.getCommitteeFriends()[i];
-        }
-
     }
 
     public void setName(String name) {
@@ -126,5 +115,21 @@ public class Committee{
         Committee committee = (Committee)o;
         return this.name.equals(committee.getName());
     }
+
+    @Override
+    public Committee clone() throws CloneNotSupportedException {
+        Committee committee = (Committee)super.clone();
+
+        committee.name = name+"New";
+
+        committee.committeeFriends = new Lecturer[committeeFriends.length];
+        for (int i = 0; i <numOfFriends; i++) {
+            committee.committeeFriends[i] =committeeFriends[i];
+        }
+        return committee;
+
+
+    }
+
 
 }

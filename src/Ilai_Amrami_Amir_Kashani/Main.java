@@ -16,25 +16,27 @@ public class Main {
         System.out.println("Enter the name of the college");
         name = input.next();
         College college = new College(name);
+        System.out.println(
+                "0: Exit\n" +
+                "1: Add a lecturer\n" +
+                "2: Add a committee\n" +
+                "3: Add a friend to the committee\n" +
+                "4: Add a new chairman to a committee\n" +
+                "5: Remove a friend from a committee\n" +
+                "6: Add a new department\n" +
+                "7: Add a lecturer to a department\n" +
+                "8: Get average of all lecturers' salary\n" +
+                "9: Get average of all lecturers' salary in a specific department\n" +
+                "10: Print all lecturers\n" +
+                "11: Print all committees\n" +
+                "12: Add an article to a lecturer\n" +
+                "13: Compare Doctors and Professors by articles\n" +
+                "14: Compare committees by number of lecturers or articles\n" +
+                "15: Copy a committee");
 
         while (exit) {
-            System.out.println("Enter the function number[0,15] you want to use:\n" +
-                    "0: Exit\n" +
-                    "1: Add a lecturer\n" +
-                    "2: Add a committee\n" +
-                    "3: Add a friend to the committee\n" +
-                    "4: Add a new chairman to a committee\n" +
-                    "5: Remove a friend from a committee\n" +
-                    "6: Add a new department\n" +
-                    "7: Add a lecturer to a department\n" +
-                    "8: Get average of all lecturers' salary\n" +
-                    "9: Get average of all lecturers' salary in a specific department\n" +
-                    "10: Print all lecturers\n" +
-                    "11: Print all committees\n" +
-                    "12: Add an article to a lecturer\n" +
-                    "13: Compare Doctors and Professors by articles\n" +
-                    "14: Compare committees by number of lecturers or articles\n" +
-                    "15: Copy a committee");            case_num = input.nextInt();
+            System.out.println("Enter the function number[0,15] you want to use:");
+            case_num = input.nextInt();
             while (case_num < 0 || case_num > 15) {
                 System.out.println("Wrong function number. Enter the function number[0,15] you want to use");
                 case_num = input.nextInt();

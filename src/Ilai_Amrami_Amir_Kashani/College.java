@@ -293,8 +293,17 @@ public class College {
         int index=findCommitteeIndexByName(com);
         if(index==-1)
             throw new ActionException("the committee doesn't exist");
+        Committee committee;
+        try {
+             committee=committees[index].clone();
+        }
+        catch (CloneNotSupportedException e) {
+            throw new ActionException("the committee is not Cloneable");
+        }
+        if (findCommitteeIndexByName(committee.getName()) !=-1)
+            throw new ActionException("the new committee is already exist");
 
-        Committee committee=new Committee(committees[index]);
+
 
         Committee[] temp = new Committee[committees.length * 2];
         for (int j = 0; j < committeeNum; j++)
