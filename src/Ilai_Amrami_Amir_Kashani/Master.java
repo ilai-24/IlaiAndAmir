@@ -1,6 +1,6 @@
 package Ilai_Amrami_Amir_Kashani;
 
-public class Master extends  Lecturer{
+public class Master extends  RegularDegree{
 
     public Master(String name, int id, String degreeName, double salary) throws ActionException {
         super(name, id, degreeName, salary);

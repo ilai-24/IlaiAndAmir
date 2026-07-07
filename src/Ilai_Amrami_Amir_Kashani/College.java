@@ -183,10 +183,10 @@ public class College {
         if (lectureIndex == -1)
             throw new ActionException("the lecturer doesn't exists");
 
-        if (!(lecturers[lectureIndex] instanceof Doctor))
+        if (!(lecturers[lectureIndex] instanceof HighDegrees))
             throw new ActionException("the lecturer is not Doctor/Proffesor");
 
-        ((Doctor) lecturers[lectureIndex]).addArticles(article);
+        ((HighDegrees) lecturers[lectureIndex]).addArticles(article);
 
     }
 
@@ -258,14 +258,14 @@ public class College {
         int doc2Index = findLecturerIndexByName(doctor2Name);
         if(doc2Index == -1)
             throw new ActionException(doctor2Name+ " doesn't exists");
-        if (!(lecturers[doc1Index] instanceof Doctor))
+        if (!(lecturers[doc1Index] instanceof HighDegrees))
             throw new ActionException( doctor1Name+" is not Doctor/Proffesor");
-        if (!(lecturers[doc2Index] instanceof Doctor))
+        if (!(lecturers[doc2Index] instanceof HighDegrees))
             throw new ActionException(doctor2Name+" is not Doctor/Proffesor");
         if (lecturers[doc1Index].equals(lecturers[doc2Index]))
             throw new ActionException("the doctors are the same person");
 
-        return  ((Doctor) lecturers[doc1Index]).compareTo((Doctor) lecturers[doc2Index]);
+        return  ((HighDegrees) lecturers[doc1Index]).compareTo((HighDegrees) lecturers[doc2Index]);
 
 
     }

@@ -1,13 +1,13 @@
 package Ilai_Amrami_Amir_Kashani;
 
-public class Professor extends Doctor {
+public class Professor extends HighDegrees {
     private String grantedProfessor;
-
 
     public Professor(String name, int id, String degreeName, double salary, String grantedProfessor) throws ActionException {
         super(name, id, degreeName, salary);
         this.grantedProfessor=grantedProfessor;
     }
+
     public String toString() {
         String department_str ="none";
         if(department !=null)

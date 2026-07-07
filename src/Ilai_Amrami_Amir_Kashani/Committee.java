@@ -44,7 +44,7 @@ public class Committee implements Cloneable{
     }
 
     public void setChairMan(Lecturer chairMan) throws  ActionException {
-        if (!(chairMan instanceof Doctor)) {
+        if (!(chairMan instanceof HighDegrees)) {
             throw new ActionException("the chair man is not a doctor or professor");}
 
 
@@ -103,8 +103,8 @@ public class Committee implements Cloneable{
     public int getNumArticles(){
         int articles = 0;
         for (int i = 0; i < numOfFriends; i++)
-            if (committeeFriends[i] instanceof Doctor)
-                articles+=((Doctor) committeeFriends[i]).getArticlesNum();
+            if (committeeFriends[i] instanceof HighDegrees)
+                articles+=((HighDegrees) committeeFriends[i]).getArticlesNum();
         return articles;
     }
 
