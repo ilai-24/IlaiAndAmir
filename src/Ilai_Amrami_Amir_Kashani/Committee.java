@@ -1,8 +1,9 @@
 package Ilai_Amrami_Amir_Kashani;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Committee implements Cloneable{
+public class Committee implements Cloneable, Serializable {
     private String name;
     private Lecturer[] committeeFriends;
     private Lecturer chairMan;

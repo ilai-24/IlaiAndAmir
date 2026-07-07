@@ -1,9 +1,10 @@
 package Ilai_Amrami_Amir_Kashani;
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
-import java.util.Scanner;
 
-public class College {
+
+public class College implements Serializable {
 
     public enum ETitle{Bachelor,Doctor,Master,Professor};
     private String name;
@@ -314,6 +315,7 @@ public class College {
 
 
     }
+
 
     @Override
     public boolean equals(Object o) {

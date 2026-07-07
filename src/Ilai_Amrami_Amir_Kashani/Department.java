@@ -1,9 +1,10 @@
 package Ilai_Amrami_Amir_Kashani;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Department {
+public class Department implements Serializable {
     private String name;
     private Lecturer[] lecturers;
     private int numOfStudents;

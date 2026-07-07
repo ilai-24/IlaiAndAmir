@@ -1,21 +1,47 @@
 package Ilai_Amrami_Amir_Kashani;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
     //Ilai Amrami:216760843
     // Amir Kashani:330917154
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner input = new Scanner(System.in);
-
+        College college=null;
+        File file = new File("collegeFile.dat");
         String committee, chairMan, name, sTitle, degreeName;
         int id, case_num;
         double salary;
         boolean exit = true;
+        try (ObjectInputStream collegeFile = new ObjectInputStream(new FileInputStream(file))) {
+            System.out.println("Do you wish to create a new college in expense of the previous one?(y/n)");
 
-        System.out.println("Enter the name of the college");
-        name = input.next();
-        College college = new College(name);
+            boolean flag = true;
+            while (flag) {
+                String ans = input.next();
+                if (ans.equals("n")) {
+                    college = (College) collegeFile.readObject();
+                    flag = false;
+                } else if (ans.equals("y")) {
+                    System.out.println("Enter the name of the college:");
+                    name = input.next();
+                    college = new College(name);
+                    flag = false;
+                } else
+                    System.out.println("Wrong input try again");
+            }
+        }
+        catch (IOException e) {
+            System.out.println("Enter the name of the college:");
+             name = input.next();
+            college = new College(name);
+        }
+        catch (ClassNotFoundException e) {
+            System.out.println("Enter the name of the college");
+            name = input.next();
+             college = new College(name);
+        }
         System.out.println(
                 "0: Exit\n" +
                 "1: Add a lecturer\n" +
@@ -44,8 +70,15 @@ public class Main {
 
             switch (case_num) {
                 case 0:
+                    try (ObjectOutputStream collegeFile = new ObjectOutputStream(new FileOutputStream("collegeFile.dat"))) {
+                        collegeFile.writeObject(college);
+                    }
+                    catch (IOException e) {
+                        System.err.println("file error while trying to save the college " + e.getMessage());
+                    }
                     exit = false;
                     break;
+
                 case 1: //add a lecturer;
                     String grantedProfessor = "";
                     System.out.println("Enter the name of the  lecturer");

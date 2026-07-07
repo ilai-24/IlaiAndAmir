@@ -1,5 +1,8 @@
 package Ilai_Amrami_Amir_Kashani;
-public abstract class Lecturer {
+
+import java.io.Serializable;
+
+public abstract class Lecturer implements Serializable {
     protected String name;
     protected int id;
     protected String degreeName;
