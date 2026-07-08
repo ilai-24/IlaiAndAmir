@@ -1,11 +1,14 @@
 package Ilai_Amrami_Amir_Kashani;
+
+import java.util.ArrayList;
+
 public abstract class Lecturer {
     protected String name;
     protected int id;
     protected String degreeName;
     protected Department department;
     protected double salary;
-    protected Committee[]committees;
+    protected Committee<?>[]committees;
     protected int numOfLecturerCommittees;
 
 

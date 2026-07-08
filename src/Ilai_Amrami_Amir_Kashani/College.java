@@ -1,7 +1,5 @@
 package Ilai_Amrami_Amir_Kashani;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class College {
 
@@ -9,17 +7,15 @@ public class College {
     private String name;
     private Lecturer[] lecturers;
     private int lecturerNum;
-    private Committee[] committees;
-    private int committeeNum;
     private Department[] departments;
     private int departmentNum;
+    private ArrayList<Committee<?>> committees;
 
     public College(String name) {
         this.name = name;
         lecturers = new Lecturer[1];
         lecturerNum = 0;
-        committees = new Committee[1];
-        committeeNum = 0;
+        committees = new ArrayList<Committee<?>>();
         departments = new Department[1];
         departmentNum = 0;
     }
@@ -40,12 +36,12 @@ public class College {
         return lecturerNum;
     }
 
-    public Committee[] getCommittees() {
+    public  ArrayList<Committee<?>> getCommittees() {
         return committees;
     }
 
     public int getCommitteeNum() {
-        return committeeNum;
+        return committees.size();
     }
 
     public Department[] getDepartments() {
@@ -127,21 +123,25 @@ public class College {
     }
 
 
-    public void addCommittee(String name, String chairMan) throws ActionException{
+    public void addCommittee(String name, String chairMan,String friendType) throws ActionException{
         int chairManIndex = findLecturerIndexByName(chairMan);
         if (chairManIndex == -1)
             throw new ActionException("chair man doesnt exist");
         if (findCommitteeIndexByName(name) != -1)
             throw new ActionException("committee name is already exist");
 
-        Committee committee = new Committee(name,lecturers[chairManIndex]);
+        Committee committee=null;
 
-        Committee[] temp = new Committee[committees.length * 2];
-        for (int j = 0; j < committeeNum; j++)
-            temp[j] = committees[j];
-        temp[committeeNum] = committee;
-        committeeNum++;
-        committees = temp;
+        if (friendType.equals("Professor"))
+            committee = new Committee<Professor>(name, lecturers[chairManIndex], Professor.class);
+        else if (friendType.equals("Doctor"))
+            committee = new Committee<Doctor>(name, lecturers[chairManIndex], Doctor.class);
+        else if (friendType.equals("RegularDegree"))
+            committee = new Committee<RegularDegree>(name, lecturers[chairManIndex], RegularDegree.class);
+        else
+            throw new ActionException("unknown friend type");
+
+        committees.add(committee);
     }
 
     public void addCommitteeFriend(String committeeName, String friendName)throws ActionException {
@@ -152,7 +152,8 @@ public class College {
         int committeeIndex = findCommitteeIndexByName(committeeName);
         if (committeeIndex == -1)
             throw new ActionException("the committee doesn't exists");
-        committees[committeeIndex].addFriend(lecturers[friendIndex]);
+
+        committees.get(committeeIndex).addFriend(lecturers[friendIndex]);
     }
 
     public void addChairmanToCommittee(String CommitteeName, String chairmanName)throws ActionException {
@@ -163,7 +164,7 @@ public class College {
         if (chairmanIndex == -1)
             throw new ActionException("the chair man doesn't exists");
 
-         committees[committeeIndex].setChairMan(lecturers[chairmanIndex]);
+         committees.get(committeeIndex).setChairMan(lecturers[chairmanIndex]);
     }
 
     public void removeFriend(String friendName, String committeeName)throws ActionException {
@@ -175,7 +176,7 @@ public class College {
         if (committeeIndex == -1)
             throw new ActionException("the committee doesn't exists");
 
-        committees[committeeIndex].removeFriend(lecturers[friendIndex]);
+        committees.get(committeeIndex).removeFriend(lecturers[friendIndex]);
     }
 
     public void addArticle(String lecturer,String article) throws ActionException {
@@ -197,18 +198,16 @@ public class College {
         }
         return -1;
     }
-
-    public int findCommitteeIndexByName(String name) {
-        for (int i = 0; i < committeeNum; i++) {
-            if (committees[i].getName().equals(name))
+    public int findDepartmentIndexByName(String name) {
+        for (int i = 0; i < departmentNum; i++) {
+            if (departments[i].getName().equals(name))
                 return i;
         }
         return -1;
     }
-
-    public int findDepartmentIndexByName(String name) {
-        for (int i = 0; i < departmentNum; i++) {
-            if (departments[i].getName().equals(name))
+    public int findCommitteeIndexByName(String name) {
+        for (int i = 0; i < committees.size(); i++) {
+            if (committees.get(i).getName().equals(name))
                 return i;
         }
         return -1;
@@ -223,10 +222,7 @@ public class College {
 
     public String toStringCommittees()
     {
-        StringBuffer str = new StringBuffer(name + " committees:");
-        for (int i = 0; i < committeeNum; i++)
-            str.append("\n" + committees[i].toString());
-        return str.toString();
+        return committees.toString();
 
     }
 
@@ -280,10 +276,10 @@ public class College {
         if(c2Index==-1)
             throw new ActionException("the second committee doesn't exist");
 
-        if (committees[c1Index].equals(committees[c2Index]))
+        if (committees.get(c1Index).equals(committees.get(c2Index)))
             throw new ActionException("the committees are the same committees");
 
-        return c.compare(committees[c1Index],committees[c2Index]);
+        return c.compare(committees.get(c1Index),committees.get(c2Index));
 
 
 
@@ -295,7 +291,7 @@ public class College {
             throw new ActionException("the committee doesn't exist");
         Committee committee;
         try {
-             committee=committees[index].clone();
+             committee=committees.get(index).clone();
         }
         catch (CloneNotSupportedException e) {
             throw new ActionException("the committee is not Cloneable");
@@ -305,12 +301,7 @@ public class College {
 
 
 
-        Committee[] temp = new Committee[committees.length * 2];
-        for (int j = 0; j < committeeNum; j++)
-            temp[j] = committees[j];
-        temp[committeeNum] = committee;
-        committeeNum++;
-        committees = temp;
+        committees.add(committee);
 
 
     }

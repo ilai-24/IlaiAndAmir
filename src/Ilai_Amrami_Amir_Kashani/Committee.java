@@ -1,18 +1,19 @@
 package Ilai_Amrami_Amir_Kashani;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Committee implements Cloneable{
+public class Committee <T extends Lecturer> implements Cloneable{
     private String name;
-    private Lecturer[] committeeFriends;
+    private ArrayList<T> committeeFriends;
     private Lecturer chairMan;
-    private int numOfFriends;
+    private Class<T> friendType;
 
-    public Committee(String name, Lecturer chairMan) throws ActionException {
+    public Committee(String name, Lecturer chairMan,Class<T> friendType) throws ActionException {
         setName(name);
         setChairMan(chairMan);
-        committeeFriends = new Lecturer[1];
-        numOfFriends=0;
+        committeeFriends =new ArrayList<>();
+        this.friendType = friendType;
     }
 
     public void setName(String name) {
@@ -24,89 +25,78 @@ public class Committee implements Cloneable{
     }
 
     public int getNumOfFriends() {
-        return numOfFriends;
+        return committeeFriends.size();
     }
 
     public Lecturer getChairMan() {
         return chairMan;
     }
 
-    public Lecturer[] getCommitteeFriends() {
-        return committeeFriends;
-    }
-
-    public void setCommitteeFriends(Lecturer[] committeeFriends) {
-        this.committeeFriends = committeeFriends;
-    }
-
-    public void setNumOfFriends(int numOfFriends) {
-        this.numOfFriends = numOfFriends;
-    }
-
     public void setChairMan(Lecturer chairMan) throws  ActionException {
         if (!(chairMan instanceof HighDegrees)) {
-            throw new ActionException("the chair man is not a doctor or professor");}
-
-
-        if (findFriendIndexByName(chairMan.getName()) != -1) {
-            throw new ActionException("the chair man is already a friend in the committee");
+            throw new ActionException("the chair man is not a doctor or professor");
         }
+        try {
+            if (committeeFriends.contains(chairMan))
+                throw new ActionException("the chair man is already a friend in the committee");
+        }
+        catch (NullPointerException e) {}
+
+
+
         if (this.chairMan != null)
             this.chairMan.removeCommittee(this);
         chairMan.addCommittee(this);
         this.chairMan = chairMan;
     }
 
-    public void addFriend(Lecturer friend)throws ActionException {
+    public void addFriend(Lecturer friend) throws ActionException {
         if (chairMan.getName().equals(friend.getName()))
             throw new ActionException("the friend is already the chair man of the committee");
-        if (findFriendIndexByName(friend.getName()) != -1)
+        if (committeeFriends.contains(friend))
             throw new ActionException("the friend is already a friend in the committee");
 
+        if (!friendType.isInstance(friend))
+            throw new ActionException("The lecturer is not of the correct type");
+
         friend.addCommittee(this);
-        Lecturer[] temp = new Lecturer[committeeFriends.length * 2];
-        for (int i = 0; i < numOfFriends; i++)
-            temp[i] = committeeFriends[i];
-        temp[numOfFriends] = friend;
-        numOfFriends++;
-        committeeFriends = temp;
+        committeeFriends.add(friendType.cast(friend));
     }
 
     public void removeFriend(Lecturer friend) throws ActionException {
-        int friendIndex = findFriendIndexByName(friend.getName());
-        if (friendIndex == -1)
+        if (!(committeeFriends.contains(friend)))
             throw new ActionException("the lecturer isn't a friend in the committee");
-
         friend.removeCommittee(this);
-        numOfFriends--;
 
-        Lecturer tempLecturer = committeeFriends[numOfFriends];
-        committeeFriends[numOfFriends] = null;
-        committeeFriends[friendIndex] = tempLecturer;
+        try {
+            T friendAdd=(T)friend;
+            committeeFriends.remove(friendAdd);
+        }
+        catch (ClassCastException e) {
+            throw new ActionException("The lecturer is not int he correct type");
+        }
+
 
     }
 
-    public int findFriendIndexByName(String name) {
-        for (int i = 0; i < numOfFriends; i++)
-            if (committeeFriends[i].getName().equals(name))
-                return i;
-        return -1;
-    }
     @Override
     public String toString() {
         StringBuffer str = new StringBuffer("committee: " + name + "\n");
-        for (int i = 0; i < numOfFriends; i++)
-            str.append(" Friends name " + i + ": " + committeeFriends[i].getName() + ", ");
+        str.append("committeeFriends: " +committeeFriends.toString());
         str.append("\n ChairmanName" + chairMan);
         return str.toString();
     }
+
     public int getNumArticles(){
         int articles = 0;
-        for (int i = 0; i < numOfFriends; i++)
-            if (committeeFriends[i] instanceof HighDegrees)
-                articles+=((HighDegrees) committeeFriends[i]).getArticlesNum();
+        Iterator<T> iterator = committeeFriends.iterator();
+        while (iterator.hasNext()) {
+            T friend = iterator.next();
+            if (friend instanceof HighDegrees)
+                articles += ((HighDegrees) friend).getArticlesNum();
+        }
         return articles;
-    }
+        }
 
     @Override
     public boolean equals(Object o) {
@@ -121,14 +111,8 @@ public class Committee implements Cloneable{
         Committee committee = (Committee)super.clone();
 
         committee.name = name+"New";
-
-        committee.committeeFriends = new Lecturer[committeeFriends.length];
-        for (int i = 0; i <numOfFriends; i++) {
-            committee.committeeFriends[i] =committeeFriends[i];
-        }
+        committee.committeeFriends =(ArrayList) committeeFriends.clone();
         return committee;
-
-
     }
 
 
