@@ -5,19 +5,16 @@ public class College {
 
     public enum ETitle{Bachelor,Doctor,Master,Professor};
     private String name;
-    private Lecturer[] lecturers;
-    private int lecturerNum;
-    private Department[] departments;
-    private int departmentNum;
+    private ArrayList<Lecturer>lecturers;
+    private  ArrayList<Department>departments;
     private ArrayList<Committee<?>> committees;
 
     public College(String name) {
         this.name = name;
-        lecturers = new Lecturer[1];
-        lecturerNum = 0;
-        committees = new ArrayList<Committee<?>>();
-        departments = new Department[1];
-        departmentNum = 0;
+        lecturers = new ArrayList<Lecturer>();
+        departments = new ArrayList<Department>();
+        committees = new ArrayList<>();
+
     }
 
     public void setName(String name) {
@@ -28,12 +25,12 @@ public class College {
         return name;
     }
 
-    public Lecturer[] getLecturers() {
+    public ArrayList<Lecturer> getLecturers() {
         return lecturers;
     }
 
     public int getLecturerNum() {
-        return lecturerNum;
+        return lecturers.size();
     }
 
     public  ArrayList<Committee<?>> getCommittees() {
@@ -44,18 +41,18 @@ public class College {
         return committees.size();
     }
 
-    public Department[] getDepartments() {
+    public ArrayList<Department> getDepartments() {
         return departments;
     }
 
     public int getDepartmentNum() {
-        return departmentNum;
+        return departments.size();
     }
 
 
     public void  addLecturer(String name, int id, String degreeName, double salary, String grantedProfessor,String sTitle)throws ActionException {
-        for (int i = 0; i < lecturerNum; i++) {
-            if (id == lecturers[i].getId())
+        for (int i = 0; i < lecturers.size(); i++) {
+            if (id == lecturers.get(i).getId())
                 throw new ActionException("the lecturer id is already exist. Try again");
         }
             ETitle eTitle;
@@ -83,12 +80,7 @@ public class College {
         }
 
 
-        Lecturer[] temp = new Lecturer[lecturers.length * 2];
-        for (int j = 0; j < lecturerNum; j++)
-            temp[j] = lecturers[j];
-        temp[lecturerNum] = lecturer;
-        lecturerNum++;
-        lecturers = temp;
+        lecturers.add(lecturer);
 
     }
 
@@ -98,13 +90,7 @@ public class College {
         }
         Department department = new Department(name, numOfStudents);
 
-        Department[] temp = new Department[departments.length * 2];
-        for (int j = 0; j < departmentNum; j++) {
-            temp[j] = departments[j];
-        }
-        departments = temp;
-        departments[departmentNum] = department;
-        departmentNum++;
+        departments.add(department);
 
     }
 
@@ -119,7 +105,7 @@ public class College {
             throw new ActionException("lecturer doesnt exist");
         }
 
-        departments[depIndex].addLecturer(lecturers[lecIndex]);
+        departments.get(depIndex).addLecturer(lecturers.get(lecIndex));
     }
 
 
@@ -133,11 +119,11 @@ public class College {
         Committee committee=null;
 
         if (friendType.equals("Professor"))
-            committee = new Committee<Professor>(name, lecturers[chairManIndex], Professor.class);
+            committee = new Committee<Professor>(name, lecturers.get(chairManIndex), Professor.class);
         else if (friendType.equals("Doctor"))
-            committee = new Committee<Doctor>(name, lecturers[chairManIndex], Doctor.class);
+            committee = new Committee<Doctor>(name, lecturers.get(chairManIndex), Doctor.class);
         else if (friendType.equals("RegularDegree"))
-            committee = new Committee<RegularDegree>(name, lecturers[chairManIndex], RegularDegree.class);
+            committee = new Committee<RegularDegree>(name,  lecturers.get(chairManIndex), RegularDegree.class);
         else
             throw new ActionException("unknown friend type");
 
@@ -153,7 +139,7 @@ public class College {
         if (committeeIndex == -1)
             throw new ActionException("the committee doesn't exists");
 
-        committees.get(committeeIndex).addFriend(lecturers[friendIndex]);
+        committees.get(committeeIndex).addFriend(lecturers.get(friendIndex));
     }
 
     public void addChairmanToCommittee(String CommitteeName, String chairmanName)throws ActionException {
@@ -164,7 +150,7 @@ public class College {
         if (chairmanIndex == -1)
             throw new ActionException("the chair man doesn't exists");
 
-         committees.get(committeeIndex).setChairMan(lecturers[chairmanIndex]);
+         committees.get(committeeIndex).setChairMan(lecturers.get(chairmanIndex));
     }
 
     public void removeFriend(String friendName, String committeeName)throws ActionException {
@@ -176,7 +162,7 @@ public class College {
         if (committeeIndex == -1)
             throw new ActionException("the committee doesn't exists");
 
-        committees.get(committeeIndex).removeFriend(lecturers[friendIndex]);
+        committees.get(committeeIndex).removeFriend(lecturers.get(friendIndex));
     }
 
     public void addArticle(String lecturer,String article) throws ActionException {
@@ -184,23 +170,25 @@ public class College {
         if (lectureIndex == -1)
             throw new ActionException("the lecturer doesn't exists");
 
-        if (!(lecturers[lectureIndex] instanceof HighDegrees))
+        if (!(lecturers.get(lectureIndex) instanceof HighDegrees))
             throw new ActionException("the lecturer is not Doctor/Proffesor");
 
-        ((HighDegrees) lecturers[lectureIndex]).addArticles(article);
+        ((HighDegrees) lecturers.get(lectureIndex)).addArticles(article);
 
     }
 
     public int findLecturerIndexByName(String name) {
-        for (int i = 0; i < lecturerNum; i++) {
-            if (lecturers[i].getName().equals(name))
+        int index = -1;
+        for (int i = 0; i < lecturers.size(); i++) {
+            if (lecturers.get(i).getName().equals(name))
                 return i;
         }
         return -1;
     }
     public int findDepartmentIndexByName(String name) {
-        for (int i = 0; i < departmentNum; i++) {
-            if (departments[i].getName().equals(name))
+        int index = -1;
+        for (int i = 0; i < departments.size(); i++) {
+            if (departments.get(i).getName().equals(name))
                 return i;
         }
         return -1;
@@ -215,8 +203,9 @@ public class College {
 
     public String toStringLecturers() {
         StringBuffer str = new StringBuffer(name + " lecturers:");
-        for (int i = 0; i < lecturerNum; i++)
-            str.append("\n" + lecturers[i].toString());
+        Iterator<Lecturer> iterator = lecturers.iterator();
+        for (int i = 0; i < lecturers.size(); i++)
+            str.append("\n" + lecturers.get(i).toString());
         return str.toString();
     }
 
@@ -226,27 +215,29 @@ public class College {
 
     }
 
-    public double sumSalary(Lecturer[] lecturers, int numOfLecturers) throws ActionException {
+    public double sumSalary(ArrayList<Lecturer>lecturers) throws ActionException {
         double sumSalary = 0;
-        for (int i = 0; i < numOfLecturers; i++)
-            sumSalary += lecturers[i].getSalary();
-        return sumSalary / numOfLecturers;
+        for (int i = 0; i < lecturers.size(); i++)
+            sumSalary += lecturers.get(i).getSalary();
+        return sumSalary / lecturers.size();
     }
 
     public double AvgSalary() throws ActionException{
-        if (lecturerNum ==0)
+        if (lecturers.isEmpty())
             throw new ActionException("there are no lecturers the college");
-        return sumSalary(lecturers, lecturerNum);
+        return sumSalary(lecturers);
     }
 
     public double departmentAvgSalary(String department) throws ActionException{
         int depNum = findDepartmentIndexByName(department);
         if (depNum == -1)
             throw new ActionException("the department doesn't exists");
-        if (departments[depNum].getNumOfLecturers() ==0)
+        if (departments.get(depNum).getNumOfLecturers() ==0)
             throw new ActionException("there are no lecturers in the department");
-        return sumSalary(departments[depNum].getLecturers(), departments[depNum].getNumOfLecturers());
+        return sumSalary(departments.get(depNum).getLecturers());
     }
+
+
     public int compareDoctorsAndProfessors(String doctor1Name,String doctor2Name) throws ActionException {
         int doc1Index = findLecturerIndexByName(doctor1Name);
         if (doc1Index == -1)
@@ -254,16 +245,14 @@ public class College {
         int doc2Index = findLecturerIndexByName(doctor2Name);
         if(doc2Index == -1)
             throw new ActionException(doctor2Name+ " doesn't exists");
-        if (!(lecturers[doc1Index] instanceof HighDegrees))
+        if (!(lecturers.get(doc1Index) instanceof HighDegrees))
             throw new ActionException( doctor1Name+" is not Doctor/Proffesor");
-        if (!(lecturers[doc2Index] instanceof HighDegrees))
+        if (!(lecturers.get(doc2Index) instanceof HighDegrees))
             throw new ActionException(doctor2Name+" is not Doctor/Proffesor");
-        if (lecturers[doc1Index].equals(lecturers[doc2Index]))
+        if (lecturers.get(doc1Index).equals(lecturers.get(doc2Index)))
             throw new ActionException("the doctors are the same person");
 
-        return  ((HighDegrees) lecturers[doc1Index]).compareTo((HighDegrees) lecturers[doc2Index]);
-
-
+        return  ((HighDegrees) lecturers.get(doc1Index)).compareTo((HighDegrees) lecturers.get(doc2Index));
     }
 
     public int compareCommittees(String committeeName1, String committeeName2, Comparator c) throws ActionException
