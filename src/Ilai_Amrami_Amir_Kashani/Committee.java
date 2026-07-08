@@ -107,11 +107,9 @@ public class Committee <T extends Lecturer> implements Cloneable{
     }
 
     @Override
-    public Committee clone() throws CloneNotSupportedException {
-        Committee committee = (Committee)super.clone();
-
+    public Committee<?> clone() throws CloneNotSupportedException {
+        Committee<?> committee = (Committee<?>)super.clone();
         committee.name = name+"New";
-        committee.committeeFriends =(ArrayList) committeeFriends.clone();
         return committee;
     }
 
