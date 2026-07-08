@@ -1,6 +1,6 @@
 package Ilai_Amrami_Amir_Kashani;
 
-public abstract class HighDegrees extends Lecturer implements Comparable<HighDegrees> {
+public abstract class HighDegrees extends Lecturer implements Comparable<HighDegrees>, java.io.Serializable{
     protected String[] articles;
     protected int articlesNum;
 

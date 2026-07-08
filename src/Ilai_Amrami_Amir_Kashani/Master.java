@@ -1,6 +1,6 @@
 package Ilai_Amrami_Amir_Kashani;
 
-public class Master extends  RegularDegree{
+public class Master extends  RegularDegree implements java.io.Serializable{
 
     public Master(String name, int id, String degreeName, double salary) throws ActionException {
         super(name, id, degreeName, salary);

@@ -1,11 +1,10 @@
 package Ilai_Amrami_Amir_Kashani;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Department implements Serializable {
+public class Department  implements java.io.Serializable{
     private String name;
     private ArrayList<Lecturer> lecturers;
     private int numOfStudents;
@@ -36,7 +35,7 @@ public class Department implements Serializable {
     }
 
     public int getNumOfLecturers() {
-        return numOfLecturers;
+        return lecturers.size();
     }
 
     public int getNumOfStudents() {

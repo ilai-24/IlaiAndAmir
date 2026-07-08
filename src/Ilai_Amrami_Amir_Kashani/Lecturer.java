@@ -1,10 +1,8 @@
 package Ilai_Amrami_Amir_Kashani;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Lecturer implements Serializable {
-
+public abstract class Lecturer implements java.io.Serializable{
     protected String name;
     protected int id;
     protected String degreeName;
@@ -47,8 +45,8 @@ public abstract class Lecturer implements Serializable {
     }
 
     public void setDepartment(Department department){
-       this.department=department;
-   }
+        this.department=department;
+    }
 
 
 
@@ -111,4 +109,5 @@ public abstract class Lecturer implements Serializable {
     }
     @Override
     public abstract String toString();
+
 }

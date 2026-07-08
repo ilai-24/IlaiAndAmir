@@ -1,6 +1,6 @@
 package Ilai_Amrami_Amir_Kashani;
 
-public class Doctor extends HighDegrees {
+public class Doctor extends HighDegrees implements java.io.Serializable {
 
     public Doctor(String name, int id, String degreeName, double salary) throws ActionException {
         super(name, id, degreeName, salary);
