@@ -117,9 +117,11 @@ public class Main {
                     committee = input.next();
                     System.out.println("Enter the name of the chair man");
                     chairMan = input.next();
+                    System.out.println("Enter the type of friends in the committee (RegularDegree,Doctor,Professor");
+                    String type = input.next();
 
                     try {
-                        college.addCommittee(committee, chairMan);
+                        college.addCommittee(committee, chairMan,type);
                         System.out.println("The committee was added successfully");
                     } catch (ActionException e) {
                         System.out.println(e.getMessage());

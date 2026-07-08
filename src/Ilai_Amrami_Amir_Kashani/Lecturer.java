@@ -1,14 +1,16 @@
 package Ilai_Amrami_Amir_Kashani;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public abstract class Lecturer implements Serializable {
+
     protected String name;
     protected int id;
     protected String degreeName;
     protected Department department;
     protected double salary;
-    protected Committee[]committees;
+    protected Committee<?>[]committees;
     protected int numOfLecturerCommittees;
 
 

@@ -1,27 +1,23 @@
 package Ilai_Amrami_Amir_Kashani;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Department implements Serializable {
     private String name;
-    private Lecturer[] lecturers;
+    private ArrayList<Lecturer> lecturers;
     private int numOfStudents;
-    private int numOfLecturers = 0;
 
     public Department(String name, int numOfStudents)throws ActionException {
         setName(name);
         setNumOfStudents(numOfStudents);
-        this.lecturers = new Lecturer[1];
+        this.lecturers = new ArrayList<>();
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setLecturers(Lecturer[] lecturers) {
-        this.lecturers = lecturers;
     }
 
     public void setNumOfStudents(int numOfStudents) throws ActionException {
@@ -30,15 +26,12 @@ public class Department implements Serializable {
         this.numOfStudents = numOfStudents;
     }
 
-    public void setNumOfLecturers(int numOfLecturers) {
-        this.numOfLecturers = numOfLecturers;
-    }
 
     public String getName() {
         return name;
     }
 
-    public Lecturer[] getLecturers() {
+    public ArrayList<Lecturer> getLecturers() {
         return lecturers;
     }
 
@@ -55,8 +48,8 @@ public class Department implements Serializable {
     }
 
     public int findLecturerIndexByName(String name) {
-        for (int i = 0; i < numOfLecturers; i++) {
-            if (lecturers[i].getName().equals(name)) {
+        for (int i = 0; i < lecturers.size(); i++) {
+            if (lecturers.get(i).getName().equals(name)) {
                 return i;
             }
         }
@@ -70,32 +63,18 @@ public class Department implements Serializable {
         if (lecturer.getDepartment() != null)
             lecturer.getDepartment().removeLecturer(lecturer);
         lecturer.setDepartment(this);
-        Lecturer[] temp = new Lecturer[lecturers.length * 2];
-        for (int i = 0; i < numOfLecturers; i++) {
-            temp[i] = lecturers[i];
-        }
-        temp[numOfLecturers] = lecturer;
-        numOfLecturers++;
-        lecturers = temp;
+
+        lecturers.add(lecturer);
     }
 
     public void removeLecturer(Lecturer lecturer) {
-        int index = findLecturerIndexByName(lecturer.getName());
-        if (index == -1) {
-            return;
-        }
-        numOfLecturers--;
-        Lecturer temp = lecturers[numOfLecturers];
-        lecturers[numOfLecturers] = null;
-        if (index != numOfLecturers) {
-            lecturers[index] = temp;
-        }
+        lecturers.remove(lecturer);
     }
     @Override
     public String toString() {
         StringBuffer str = new StringBuffer("Ilai_Amrami_Amir_Kashani.Department: " + name + "\n");
-        for (int i = 0; i < numOfLecturers; i++) {
-            str.append(" Ilai_Amrami_Amir_Kashani.Lecturer name " + i + ": " + lecturers[i].getName() + ", ");
+        for (int i = 0; i < lecturers.size(); i++) {
+            str.append(" Ilai_Amrami_Amir_Kashani.Lecturer name " + i + ": " + lecturers.get(i).getName() + ", ");
         }
         return str.toString();
     }
