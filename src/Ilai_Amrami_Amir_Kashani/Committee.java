@@ -64,20 +64,17 @@ public class Committee <T extends Lecturer> implements Cloneable{
     }
 
     public void removeFriend(Lecturer friend) throws ActionException {
-        if (!(committeeFriends.contains(friend)))
-            throw new ActionException("the lecturer isn't a friend in the committee");
-        friend.removeCommittee(this);
-
         try {
-            T friendAdd=(T)friend;
-            committeeFriends.remove(friendAdd);
+            if (!(committeeFriends.contains(friend)))
+                throw new ActionException("the lecturer isn't a friend in the committee");
         }
         catch (ClassCastException e) {
             throw new ActionException("The lecturer is not int he correct type");
         }
-
-
-    }
+            T friendAdd=(T)friend;
+            committeeFriends.remove(friendAdd);
+            friend.removeCommittee(this);
+        }
 
     @Override
     public String toString() {
