@@ -13,11 +13,11 @@ public class Professor extends HighDegrees implements java.io.Serializable{
         if(department !=null)
             department_str=department.getName();
         StringBuffer str=new StringBuffer("name: "+name+", id: "+id+", title: Professor"+", degree name: "+this.degreeName+", salary: "+salary+" ,granted Professor from:"+grantedProfessor+" ,department: "+department_str+",committees: ");
-        for (int i=0;i<numOfLecturerCommittees;i++)
-            str.append(committees[i].getName()+", ");
+        for (int i=0;i<committees.size();i++)
+            str.append(committees.get(i).getName()+", ");
         str.append(", articles: ");
-        for (int j=0;j<articlesNum;j++)
-            str.append(articles[j]+", ");
+        for (int j=0;j<articles.size();j++)
+            str.append(articles.get(j)+", ");
         return str.toString();
     }
 }

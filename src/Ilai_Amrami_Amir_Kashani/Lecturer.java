@@ -8,8 +8,7 @@ public abstract class Lecturer implements java.io.Serializable{
     protected String degreeName;
     protected Department department;
     protected double salary;
-    protected Committee<?>[]committees;
-    protected int numOfLecturerCommittees;
+    protected ArrayList<Committee<?>> committees;
 
 
     public Lecturer(String name,int id,String degreeName,double salary)throws ActionException {
@@ -17,8 +16,7 @@ public abstract class Lecturer implements java.io.Serializable{
         setId(id);
         setDegreeName(degreeName);
         setSalary(salary);
-        committees=new Committee[1];
-        numOfLecturerCommittees=0;
+        committees=new ArrayList<>();
     }
 
     public double getSalary() {
@@ -68,33 +66,22 @@ public abstract class Lecturer implements java.io.Serializable{
     }
 
     public int getNumOfLecturerCommittees() {
-        return numOfLecturerCommittees;
+        return committees.size();
     }
 
-    public Committee[] getCommittees() {
+    public ArrayList<Committee<?>> getCommittees() {
         return committees;
     }
     public void addCommittee(Committee committee){
-        Committee[]temp=new Committee[committees.length*2];
-        for (int i=0;i<numOfLecturerCommittees;i++)
-            temp[i]=committees[i];
-        temp[numOfLecturerCommittees]=committee;
-        numOfLecturerCommittees++;
-        committees=temp;
+        committees.add(committee);
+
     }
     public void removeCommittee(Committee committee){
-        if (numOfLecturerCommittees==0)
-            return;
-        int index = findCommitteeIndexByName(committee.getName());
-
-        numOfLecturerCommittees--;
-        Committee temp = committees[numOfLecturerCommittees];
-        committees[numOfLecturerCommittees] = null;
-        committees[index] =temp;
+        committees.remove(committee);
     }
     public int findCommitteeIndexByName(String name) {
-        for (int i=0;i<numOfLecturerCommittees;i++)
-            if (name.equals(committees[i].getName()))
+        for (int i=0;i<committees.size();i++)
+            if (name.equals(committees.get(i).getName()))
                 return i;
         return -1;
     }

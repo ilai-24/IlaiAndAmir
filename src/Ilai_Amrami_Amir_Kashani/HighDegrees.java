@@ -1,33 +1,26 @@
 package Ilai_Amrami_Amir_Kashani;
 
+import java.util.ArrayList;
+
 public abstract class HighDegrees extends Lecturer implements Comparable<HighDegrees>, java.io.Serializable{
-    protected String[] articles;
-    protected int articlesNum;
+    protected ArrayList<String> articles;
 
 
     public HighDegrees(String name, int id, String degreeName, double salary) throws ActionException {
         super(name, id, degreeName, salary);
-        this.articles=new String[1];
-        articlesNum=0;
+        articles=new ArrayList<>();
     }
 
     public void addArticles(String article) {
-        String[]temp=new String[articles.length*2];
-
-        for(int i=0;i<articles.length;i++){
-            temp[i]=articles[i];
-        }
-        articles=temp;
-        articles[articlesNum]=article;
-        articlesNum++;
+        articles.add(article);
     }
 
     public int getArticlesNum() {
-        return articlesNum;
+        return articles.size();
     }
 
     public boolean isMoreArticles(Doctor doctor) {
-        if(doctor.getArticlesNum()>articlesNum){
+        if(doctor.getArticlesNum()>articles.size()){
             return true;
         }
         return false;
@@ -35,10 +28,10 @@ public abstract class HighDegrees extends Lecturer implements Comparable<HighDeg
 
     @Override
     public int compareTo(HighDegrees HighDegree) {
-        if (HighDegree.getArticlesNum()>articlesNum) {
+        if (HighDegree.getArticlesNum()>articles.size()) {
             return -1;
         }
-        if (HighDegree.getArticlesNum()<articlesNum) {
+        if (HighDegree.getArticlesNum()<articles.size()) {
             return 1;
         }
         return 0;

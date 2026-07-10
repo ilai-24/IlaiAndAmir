@@ -11,8 +11,8 @@ public class Bachelor extends RegularDegree{
         if(department !=null)
             department_str=department.getName();
         StringBuffer str=new StringBuffer("name: "+name+", id: "+id+", title:bachelor "+", degree name: "+degreeName+", salary: "+salary+",department: "+department_str+",committees: ");
-        for (int i=0;i<numOfLecturerCommittees;i++)
-            str.append(committees[i].getName()+", ");
+        for (int i=0;i<committees.size();i++)
+            str.append(committees.get(i).getName()+", ");
         return str.toString();
     }
 }
